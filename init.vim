@@ -100,6 +100,7 @@ nnoremap <C-j> <C-w>J
 nnoremap <C-k> <C-w>K
 nnoremap <C-l> <C-w>L
 nnoremap <C-h> <C-w>H
+nnoremap <Leader>t :vs <CR>:terminal<CR>
 set splitbelow
 set splitright
 
@@ -221,3 +222,8 @@ let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
