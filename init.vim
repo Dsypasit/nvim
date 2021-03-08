@@ -103,7 +103,7 @@ nnoremap <C-j> <C-w>J
 nnoremap <C-k> <C-w>K
 nnoremap <C-l> <C-w>L
 nnoremap <C-h> <C-w>H
-nnoremap <Leader>t :vs <CR>:terminal<CR>
+nnoremap <Leader>t :vs\|:ter<CR>
 set splitbelow
 set splitright
 
