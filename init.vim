@@ -21,6 +21,7 @@ call plug#end()
 
 
 syntax  on
+set autochdir
 set relativenumber
 set encoding=utf8
 set visualbell
@@ -32,6 +33,8 @@ set si "Smart indent
 set wrap "Wrap lines
 set t_Co=256
 set noswapfile
+set nobackup
+set nowritebackup
 filetype plugin indent on
 
 "set python
@@ -223,7 +226,13 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+	  \ pumvisible() ? "\<C-n>" :
+	  \ <SID>check_back_space() ? "\<TAB>" :
+	  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
