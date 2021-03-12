@@ -35,6 +35,8 @@ set t_Co=256
 set noswapfile
 set nobackup
 set nowritebackup
+set path+=**
+set wildmenu
 filetype plugin indent on
 
 "set python
