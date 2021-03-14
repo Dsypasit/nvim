@@ -26,6 +26,9 @@ let g:user_emmet_mode='a'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 
+" We bind it to <leader>e here, feel free to change this
+nmap <space>e :CocCommand explorer<CR>
+
 syntax  on
 set title
 set titlestring=NVIM:\ %-25.55F\ %a%r%m titlelen=70
@@ -102,7 +105,6 @@ Arpeggio inoremap ij <Del>
 
 
 "split
-
 nmap <C-w>j :sp <cr>
 nmap <C-w>l :vs <cr>
 nnoremap <Up> :resize +2<CR>
@@ -128,7 +130,6 @@ let mapleader="\\"
 let maplocalleader="\\"
 nnoremap <Space>s :Lines<CR>
 map <C-p> :set invpaste<CR>
-
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 0
@@ -151,10 +152,8 @@ noremap L $
 " fzf
 nnoremap <Space>b :Buffers<cr>
 "Empty value to disable preview window altogether
-let g:fzf_preview_window = ''
+let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 
-" Always enable preview window on the right with 60% width
-let g:fzf_preview_window = 'right:60%'
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
@@ -338,7 +337,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
