@@ -30,6 +30,7 @@ autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 nmap <space>e :CocCommand explorer<CR>
 
 syntax  on
+set mouse=a
 set title
 set titlestring=NVIM:\ %-25.55F\ %a%r%m titlelen=70
 set timeout 
