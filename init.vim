@@ -18,6 +18,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
 Plug 'chrisbra/unicode.vim'
 Plug 'mattn/emmet-vim'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 let g:ruby_host_prog = '/usr/bin/ruby'
