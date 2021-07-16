@@ -174,8 +174,7 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 " airline
 let g:airline_theme='gruvbox'
-let g:airline_extensions = []
-let g:airline_focuslost_inactive = 0
+"let g:airline_focuslost_inactive = 0
 if ! has('gui_running')
   set ttimeoutlen=10
   augroup FastEscape
@@ -187,10 +186,9 @@ endif
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 " remove unused modes
-let g:airline_enable_fugitive=0
-let g:airline_enable_syntastic=0
+let g:airline_extensions = ['branch', 'fugitiveline', 'fzf']
 " set second section to filename
-let g:airline_section_b="%f"
+"let g:airline_section_b="%f"
 " empty third and fourth sections
 "let g:airline_section_c="%T"
 let g:airline_section_x=""
