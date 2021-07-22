@@ -5,6 +5,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Or build from source code by using yarn: https://yarnpkg.com
 "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
+Plug 'pangloss/vim-javascript' , { 'for': ['javascript', 'javascript.jsx', 'html', 'vue'] }
+Plug 'jelera/vim-javascript-syntax'
+Plug 'mxw/vim-jsx'
+Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'scrooloose/nerdtree',{'on':'NERDTreeToggle'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -28,12 +34,18 @@ call plug#end()
 let g:ruby_host_prog = '/usr/bin/ruby'
 
 let g:user_emmet_mode='a'
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,javascript,javascriptreact EmmetInstall
+let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+"let g:user_emmet_install_global = 0
+let g:user_emmet_leader_key=','
 
+autocmd FileType html,css,javascript,javascriptreact EmmetInstall
+let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
 nmap <space>e :CocCommand explorer<CR>
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 Dracu :colorscheme dracula : AirlineTheme dracula
 
+tnoremap <C-n> <C-\><C-n>
 syntax  on
 set mouse=a
 set title
@@ -58,6 +70,8 @@ set nobackup
 set nowritebackup
 set path+=**
 set wildmenu
+set autoread
+filetype on
 filetype plugin indent on
 
 "set python
@@ -94,7 +108,6 @@ let g:vifm_embed_split = 1
 
 
 "golden viewer
-set autoread
 set noerrorbells
 set novisualbell
 set tm=500
