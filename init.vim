@@ -149,7 +149,6 @@ set splitright
 let mapleader="\\"
 let maplocalleader="\\"
 nnoremap <Space>s :Lines<CR>
-map <C-p> :set invpaste<CR>
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 0
