@@ -38,6 +38,7 @@ let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 "let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 
+autocmd BufRead, BufWritePre *.java normal gg=G
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
@@ -49,11 +50,6 @@ tnoremap <C-n> <C-\><C-n>
 syntax  on
 set mouse=a
 set title
-set titlestring=NVIM:\ %-25.55F\ %a%r%m titlelen=70
-set timeout 
-set timeoutlen=3000 
-set ttimeoutlen=100
-set updatetime=300
 set autochdir
 set relativenumber
 set encoding=utf8
@@ -79,9 +75,14 @@ command -nargs=0 Jsonformat execute "%!python -m json.tool"
 
 "set theme 
 set termguicolors
-let g:gruvbox_transparent_bg = 1
 colorscheme gruvbox 
+let g:gruvbox_transparent_bg = 1
 set background=dark
+let g:gruvbox_contrast_dark = "soft"
+autocmd VimEnter * hi Normal ctermbg=none guibg=NONE
+"highlight Normal     ctermbg=236 guibg=NONE 
+"highlight LineNr     ctermbg=NONE guibg=NONE
+"highlight SignColumn ctermbg=NONE guibg=NONE
 
 "hide toolbars
 if has("gui_running")
@@ -244,7 +245,7 @@ let g:NERDCompactSexyComs = 1
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-let g:coc_global_extensions = ['coc-json', 'coc-git']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-java']
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
