@@ -38,7 +38,8 @@ let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 "let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 
-autocmd BufRead, BufWritePre *.java normal gg=G
+autocmd BufRead, BufWritePost *.java normal gg=G
+autocmd Filetype markdown setlocal ts=2 sw=2 expandtab
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
@@ -48,7 +49,7 @@ command! -nargs=0 Dracu :colorscheme dracula : AirlineTheme dracula
 
 tnoremap <C-n> <C-\><C-n>
 syntax  on
-set mouse=a
+"set mouse=a
 set title
 set autochdir
 set relativenumber
@@ -186,7 +187,7 @@ let g:fzf_tags_command = 'ctags -R'
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 " airline
-let g:airline_theme='gruvbox'
+let g:airline_theme='hybrid'
 "let g:airline_focuslost_inactive = 0
 if ! has('gui_running')
   set ttimeoutlen=10
@@ -200,8 +201,6 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 " remove unused modes
 let g:airline_extensions = ['branch', 'fugitiveline', 'fzf']
-" set second section to filename
-"let g:airline_section_b="%f"
 " empty third and fourth sections
 "let g:airline_section_c="%T"
 let g:airline_section_x=""
