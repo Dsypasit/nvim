@@ -82,7 +82,7 @@ set background=dark
 let g:gruvbox_contrast_dark = "soft"
 autocmd VimEnter * hi Normal ctermbg=none guibg=NONE
 "highlight Normal     ctermbg=236 guibg=NONE 
-"highlight LineNr     ctermbg=NONE guibg=NONE
+"highlight LineNr     ctermfg=NONE guifg=NONE
 "highlight SignColumn ctermbg=NONE guibg=NONE
 
 "hide toolbars
@@ -164,6 +164,8 @@ nnoremap <Space>w :w<CR>
 "exis
 nnoremap qq :qa 
 nnoremap <Space>q :q<CR> 
+
+noremap <Space>y "+y
 
 
 noremap H ^
