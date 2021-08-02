@@ -165,6 +165,7 @@ nnoremap <Space>w :w<CR>
 nnoremap qq :qa 
 nnoremap <Space>q :q<CR> 
 
+inoremap <C-c> <Esc>
 noremap <Space>y "+y
 
 
