@@ -11,7 +11,6 @@ Plug 'pangloss/vim-javascript' , { 'for': ['javascript', 'javascript.jsx', 'html
 Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'dracula/vim', { 'name': 'dracula' }
-Plug 'scrooloose/nerdtree',{'on':'NERDTreeToggle'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
@@ -19,16 +18,11 @@ Plug 'tpope/vim-surround'
 Plug 'kana/vim-arpeggio'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdcommenter'
-Plug 'vifm/vifm.vim'
-Plug 'honza/vim-snippets'
 Plug 'chrisbra/unicode.vim'
 Plug 'mattn/emmet-vim'
-Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 let g:ruby_host_prog = '/usr/bin/ruby'
@@ -38,6 +32,7 @@ let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 "let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key=','
 
+au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd Filetype markdown setlocal ts=2 sw=2 expandtab
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
@@ -79,9 +74,9 @@ set termguicolors
 colorscheme gruvbox 
 let g:gruvbox_transparent_bg = 1
 set background=dark
-let g:gruvbox_contrast_dark = "soft"
-autocmd VimEnter * hi Normal ctermbg=none guibg=NONE
-"highlight Normal     ctermbg=236 guibg=NONE 
+highlight normal     ctermbg=black guibg=black
+highlight SignColumn guibg=black ctermbg=black
+"autocmd VimEnter * hi Normal ctermbg=none guibg=none
 "highlight LineNr     ctermfg=NONE guifg=NONE
 "highlight SignColumn ctermbg=NONE guibg=NONE
 
@@ -97,17 +92,6 @@ nnoremap <Space>gc :GCheckout<CR>
 nnoremap <Space>gb :GBranches<CR>
 noremap gh :diffget //3<CR>
 noremap gu :diffget //2<cr>
-
-" vifm
-nmap <Space>vv :EditVifm<CR>
-nmap <Space><Space>v :VsplitVifm<CR>
-nmap <Space><Space>s :SplitVifm<CR>
-nmap <Space>dv :DiffVifm<CR>
-nmap <Space><Space>t :TabVifm<CR>
-let g:vifm_repalce_netrw = 1
-let g:vifm_replace_netrw_cmd = "Vifm"
-let g:vifm_embed_split = 1
-
 
 "golden viewer
 set noerrorbells
@@ -149,15 +133,11 @@ set splitright
 "Easy Motion
 let mapleader="\\"
 let maplocalleader="\\"
-nnoremap <Space>s :Lines<CR>
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 0
 map <Space>f <plug>(easymotion-bd-f)
 nmap <Space>f <plug>(easymotion-overwin-f)
-
-"Nerdtree
-map <C-n> :NERDTreeToggle<CR>
 
 "autosave
 nnoremap <Space>w :w<CR>
@@ -195,9 +175,9 @@ let g:airline_theme='hybrid'
 if ! has('gui_running')
   set ttimeoutlen=10
   augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
+	autocmd!
+	au InsertEnter * set timeoutlen=0
+	au InsertLeave * set timeoutlen=1000
   augroup END
 endif
 let g:airline_left_sep=''
