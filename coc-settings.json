@@ -12,6 +12,6 @@
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/utils/snips"],
-  "clangd.path": "/home/dsy/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
+  "clangd.path": "/home/dsypasit/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
   "java.format.settings.url": "/home/dsypasit/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
 }

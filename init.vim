@@ -18,11 +18,13 @@ Plug 'tpope/vim-surround'
 Plug 'kana/vim-arpeggio'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdcommenter'
 Plug 'chrisbra/unicode.vim'
 Plug 'mattn/emmet-vim'
+Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 
 let g:ruby_host_prog = '/usr/bin/ruby'
@@ -34,7 +36,7 @@ let g:user_emmet_leader_key=','
 
 au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
-autocmd Filetype markdown setlocal ts=2 sw=2 expandtab
+autocmd Filetype markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
@@ -45,6 +47,7 @@ command! -nargs=0 Dracu :colorscheme dracula : AirlineTheme dracula
 tnoremap <C-n> <C-\><C-n>
 syntax  on
 "set mouse=a
+set ignorecase
 set title
 set autochdir
 set relativenumber
@@ -60,13 +63,21 @@ set t_Co=256
 set noswapfile
 set nobackup
 set nowritebackup
-set path+=**
 set wildmenu
 set autoread
 filetype on
 filetype plugin indent on
 
-"set python
+set path=$HOME/dotfile,$HOME/codes/*,$HOME/.config/nvim,$HOME,$HOME/codes/university_code/**,$HOME/.config/starship.toml,$HOME/.config/picom,$HOME/.config/dunst,$HOME/.config/polybar,$HOME/.i3,$HOME/.config/,
+set path+=**
+
+let g:netrw_browse_split=4
+let g:netrw_altv=1
+let g:netrw_liststyle=3
+let g:netrw_list_hide=netrw_gitignore#Hide()
+"check |netrw-browse-map| for more mapping 
+
+command MakeTags !ctags -R .
 command -nargs=0 Jsonformat execute "%!python -m json.tool"
 
 "set theme 
@@ -92,6 +103,7 @@ nnoremap <Space>gc :GCheckout<CR>
 nnoremap <Space>gb :GBranches<CR>
 noremap gh :diffget //3<CR>
 noremap gu :diffget //2<cr>
+set diffopt+=vertical
 
 "golden viewer
 set noerrorbells
@@ -107,7 +119,6 @@ Arpeggio inoremap jk <Esc>
 Arpeggio noremap jk <Esc>
 Arpeggio inoremap ef <BS>
 Arpeggio inoremap ij <Del>
-
 
 "split
 nmap <C-w>j :sp <cr>
@@ -148,6 +159,9 @@ nnoremap <Space>q :q<CR>
 inoremap <C-c> <Esc>
 noremap <Space>y "+y
 
+nnoremap <C-s><C-j> :bp<cr>
+nnoremap <C-s><C-k> :bn<cr>
+nnoremap <C-s><C-l> :ls<cr>:b
 
 noremap H ^
 noremap L $
@@ -256,7 +270,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -312,11 +326,6 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
