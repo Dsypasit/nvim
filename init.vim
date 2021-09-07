@@ -36,13 +36,17 @@ let g:user_emmet_leader_key=','
 
 au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
-autocmd Filetype markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
+autocmd BufRead, BufWritePost *.java normal :Jsonformat
+autocmd Filetype yaml,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
 nmap <space>e :CocCommand explorer<CR>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-command! -nargs=0 Dracu :colorscheme dracula : AirlineTheme dracula
+command! -nargs=0 Dracu :colorscheme dracula 
+autocmd FileType c command! -nargs=0 Rc :!gcc %;./a.out
+autocmd FileType cpp command! -nargs=0 Rc :!g++ %;./a.out
+
 
 tnoremap <C-n> <C-\><C-n>
 syntax  on
@@ -50,8 +54,9 @@ syntax  on
 set ignorecase
 set title
 set autochdir
-set relativenumber
-set encoding=utf8
+nmap <F2> :set relativenumber!<cr>
+set encoding=utf-8
+set fileencodings=utf-8
 set visualbell
 set shiftwidth=4
 set hidden
@@ -79,14 +84,15 @@ let g:netrw_list_hide=netrw_gitignore#Hide()
 
 command MakeTags !ctags -R .
 command -nargs=0 Jsonformat execute "%!python -m json.tool"
+command -nargs=0 Xmlformat :%! xmllint --format -
 
 "set theme 
 set termguicolors
 colorscheme gruvbox 
 let g:gruvbox_transparent_bg = 1
 set background=dark
-highlight normal     ctermbg=black guibg=black
-highlight SignColumn guibg=black ctermbg=black
+highlight normal     ctermbg=none guibg=none
+highlight SignColumn guibg=none ctermbg=none
 "autocmd VimEnter * hi Normal ctermbg=none guibg=none
 "highlight LineNr     ctermfg=NONE guifg=NONE
 "highlight SignColumn ctermbg=NONE guibg=NONE
@@ -275,7 +281,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
+ "Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
