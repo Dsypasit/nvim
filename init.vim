@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -44,8 +44,11 @@ let g:jsx_ext_required = 1
 nmap <space>e :CocCommand explorer<CR>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 Dracu :colorscheme dracula 
+
+nnoremap <space>r :Rc<cr>
 autocmd FileType c command! -nargs=0 Rc :!gcc %;./a.out
 autocmd FileType cpp command! -nargs=0 Rc :!g++ %;./a.out
+autocmd FileType python command! -nargs=0 Rc :sp|:res -10|:term python3 % <cr>i
 
 
 tnoremap <C-n> <C-\><C-n>
@@ -246,7 +249,7 @@ let g:NERDCompactSexyComs = 1
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-java']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-java', 'coc-explorer']
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
