@@ -46,8 +46,8 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 Dracu :colorscheme dracula 
 
 nnoremap <space>r :Rc<cr>
-autocmd FileType c command! -nargs=0 Rc :!gcc %;./a.out
-autocmd FileType cpp command! -nargs=0 Rc :!g++ %;./a.out
+autocmd FileType c command! -nargs=0 Rc :sp|:res -10|:term gcc %;./a.out
+autocmd FileType cpp command! -nargs=0 Rc :sp|:res -10|:term g++ %;./a.out
 autocmd FileType python command! -nargs=0 Rc :sp|:res -10|:term python3 % <cr>i
 
 
