@@ -36,7 +36,7 @@ let g:user_emmet_leader_key=','
 
 au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
-autocmd BufRead, BufWritePost *.java normal :Jsonformat
+autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
 autocmd Filetype yaml,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
@@ -46,6 +46,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 Dracu :colorscheme dracula 
 
 nnoremap <space>r :Rc<cr>
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 autocmd FileType c command! -nargs=0 Rc :sp|:res -10|:term gcc %;./a.out
 autocmd FileType cpp command! -nargs=0 Rc :sp|:res -10|:term g++ %;./a.out
 autocmd FileType python command! -nargs=0 Rc :sp|:res -10|:term python3 % <cr>i
