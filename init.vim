@@ -90,10 +90,19 @@ command MakeTags !ctags -R .
 command -nargs=0 Jsonformat execute "%!python -m json.tool"
 command -nargs=0 Xmlformat :%! xmllint --format -
 
+function! PlugLoaded(name)
+    return (
+        \ has_key(g:plugs, a:name) &&
+        \ isdirectory(g:plugs[a:name].dir) &&
+        \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
+endfunction
+
 "set theme 
 set termguicolors
-colorscheme gruvbox 
-let g:gruvbox_transparent_bg = 1
+if PlugLoaded('gruvbox')
+	colorscheme gruvbox 
+	let g:gruvbox_transparent_bg = 1
+endif
 set background=dark
 highlight normal     ctermbg=none guibg=none
 highlight SignColumn guibg=none ctermbg=none
@@ -124,11 +133,13 @@ set number
 set nocp
 
 "set arpeggio
-call arpeggio#load()	
-Arpeggio inoremap jk <Esc>
-Arpeggio noremap jk <Esc>
-Arpeggio inoremap ef <BS>
-Arpeggio inoremap ij <Del>
+if PlugLoaded('Arpeggio')
+	call arpeggio#load()	
+	Arpeggio inoremap jk <Esc>
+	Arpeggio noremap jk <Esc>
+	Arpeggio inoremap ef <BS>
+	Arpeggio inoremap ij <Del>
+endif
 
 "split
 nmap <C-w>j :sp <cr>
