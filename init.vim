@@ -71,6 +71,7 @@ syntax  on
 set ignorecase
 set title
 set autochdir
+set relativenumber
 nmap <F2> :set relativenumber!<cr>
 set encoding=utf-8
 set fileencodings=utf-8
@@ -102,7 +103,7 @@ let g:netrw_list_hide=netrw_gitignore#Hide()
 
 command MakeTags !ctags -R .
 command -nargs=0 Jsonformat execute "%!python -m json.tool"
-command -nargs=0 Xmlformat :%! xmllint --format -
+command -nargs=0 Xmlformat :%! tidy -xml -iq -
 
 function! PlugLoaded(name)
     return (
@@ -153,7 +154,7 @@ Arpeggio inoremap ij <Del>
 
 "split
 nmap <C-w>j :sp <cr>
-nmap <C-w>l :vs <cr>
+nmap <C-w>k :vs <cr>
 nnoremap <Up> :resize +2<CR>
 nnoremap <Down> :resize -2<CR>
 nnoremap <Left> :vertical resize +2<CR>
