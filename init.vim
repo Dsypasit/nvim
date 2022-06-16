@@ -4,7 +4,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Or build from source code by using yarn: https://yarnpkg.com
 "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'pangloss/vim-javascript' , { 'for': ['javascript', 'javascript.jsx', 'html', 'vue'] }
@@ -50,7 +50,20 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 autocmd FileType c command! -nargs=0 Rc :sp|:res -10|:term gcc %;./a.out
 autocmd FileType cpp command! -nargs=0 Rc :sp|:res -10|:term g++ %;./a.out
 autocmd FileType python command! -nargs=0 Rc :sp|:res -10|:term python3 % <cr>i
+autocmd FileType go command! -nargs=0 Rc :sp|:res -10|:term go run % <cr>i
 
+
+" golang
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:go_auto_type_info = 2
+let g:go_list_type = "quickfix"
+au filetype go inoremap <buffer> . .<C-x><C-o>
 
 tnoremap <C-n> <C-\><C-n>
 syntax  on
@@ -74,6 +87,7 @@ set nobackup
 set nowritebackup
 set wildmenu
 set autoread
+set autowrite
 filetype on
 filetype plugin indent on
 
@@ -99,10 +113,8 @@ endfunction
 
 "set theme 
 set termguicolors
-if PlugLoaded('gruvbox')
-	colorscheme gruvbox 
-	let g:gruvbox_transparent_bg = 1
-endif
+colorscheme gruvbox 
+let g:gruvbox_transparent_bg = 1
 set background=dark
 highlight normal     ctermbg=none guibg=none
 highlight SignColumn guibg=none ctermbg=none
@@ -133,13 +145,11 @@ set number
 set nocp
 
 "set arpeggio
-if PlugLoaded('Arpeggio')
-	call arpeggio#load()	
-	Arpeggio inoremap jk <Esc>
-	Arpeggio noremap jk <Esc>
-	Arpeggio inoremap ef <BS>
-	Arpeggio inoremap ij <Del>
-endif
+call arpeggio#load()	
+Arpeggio inoremap jk <Esc>
+Arpeggio noremap jk <Esc>
+Arpeggio inoremap ef <BS>
+Arpeggio inoremap ij <Del>
 
 "split
 nmap <C-w>j :sp <cr>
