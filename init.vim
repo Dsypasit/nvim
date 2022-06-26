@@ -5,6 +5,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Or build from source code by using yarn: https://yarnpkg.com
 "Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'pangloss/vim-javascript' , { 'for': ['javascript', 'javascript.jsx', 'html', 'vue'] }
@@ -25,7 +26,22 @@ Plug 'preservim/nerdcommenter'
 Plug 'chrisbra/unicode.vim'
 Plug 'mattn/emmet-vim'
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
+
+lua require("tree")
+lua require("tele")
+"telescope
+"Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>ft <cmd>Telescope tags<cr>
+nnoremap <leader>gg <cmd>Telescope git_files<cr>
+
 
 let g:ruby_host_prog = '/usr/bin/ruby'
 
@@ -63,7 +79,7 @@ let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 let g:go_auto_type_info = 2
 let g:go_list_type = "quickfix"
-au filetype go inoremap <buffer> . .<C-x><C-o>
+"au filetype go inoremap <buffer> . .<C-x><C-o>
 
 tnoremap <C-n> <C-\><C-n>
 syntax  on
@@ -73,6 +89,7 @@ set title
 set autochdir
 set relativenumber
 nmap <F2> :set relativenumber!<cr>
+nmap <F4> :source ~/.config/nvim/init.vim<cr>
 set encoding=utf-8
 set fileencodings=utf-8
 set visualbell
@@ -214,6 +231,7 @@ let g:fzf_tags_command = 'ctags -R'
 
 " [Commands] --expect expression for directly executing the command
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " airline
 let g:airline_theme='hybrid'
@@ -273,6 +291,7 @@ let g:NERDCompactSexyComs = 1
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-java', 'coc-explorer']
+let g:coc_disable_transparent_cursor = 1
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
