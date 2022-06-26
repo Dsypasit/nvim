@@ -124,6 +124,28 @@ command MakeTags !ctags -R .
 command -nargs=0 Jsonformat execute "%!python -m json.tool"
 command -nargs=0 Xmlformat :%! tidy -xml -iq -
 
+" update tags auto
+
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
+
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+endfunction
+autocmd BufWritePost *.cpp,*.h,*.c,*.go,*.py call UpdateTags()
+
 function! PlugLoaded(name)
     return (
         \ has_key(g:plugs, a:name) &&
@@ -134,7 +156,8 @@ endfunction
 "set theme 
 set termguicolors
 colorscheme gruvbox 
-let g:gruvbox_transparent_bg = 1
+let g:gruvbox_transparent_bg=1
+let g:gruvbox_contrast_dark="medium"
 set background=dark
 highlight normal     ctermbg=none guibg=none
 highlight SignColumn guibg=none ctermbg=none
