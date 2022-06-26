@@ -42,6 +42,8 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>ft <cmd>Telescope tags<cr>
 nnoremap <leader>gg <cmd>Telescope git_files<cr>
 
+" markdown
+let g:mkdp_browser = '/var/lib/snapd/snap/bin/firefox'
 
 let g:ruby_host_prog = '/usr/bin/ruby'
 
