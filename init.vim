@@ -15,6 +15,13 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+" snip
+Plug 'L3MON4D3/LuaSnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
+" nerdtree
+Plug 'preservim/nerdtree'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
@@ -44,8 +51,10 @@ call plug#end()
 
 " lua
 lua require('lsp_config')
+lua require('cmp_config')
 lua require("tree")
 lua require("tele")
+autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
 
 "Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -72,7 +81,7 @@ autocmd Filetype yaml,markdown,html,css,javascript,javascriptreact,arduino set t
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
-nmap <space>e :CocCommand explorer<CR>
+"nmap <space>e :CocCommand explorer<CR>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 Dracu :colorscheme dracula 
 
@@ -82,7 +91,6 @@ autocmd FileType c command! -nargs=0 Rc :sp|:res -10|:term gcc %;./a.out
 autocmd FileType cpp command! -nargs=0 Rc :sp|:res -10|:term g++ %;./a.out
 autocmd FileType python command! -nargs=0 Rc :sp|:res -10|:term python3 % <cr>i
 autocmd FileType go command! -nargs=0 Rc :sp|:res -10|:term go run % <cr>i
-
 
 " golang
 let g:go_fmt_command = "goimports"
@@ -255,6 +263,8 @@ nnoremap <C-s><C-l> :ls<cr>:b
 
 noremap H ^
 noremap L $
+
+nnoremap <space>e :NERDTreeToggle<CR>
 
 " fzf
 nnoremap <Space>b :Buffers<cr>
