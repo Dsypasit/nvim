@@ -23,6 +23,13 @@ Plug 'hrsh7th/vim-vsnip-integ'
 " nerdtree
 Plug 'preservim/nerdtree'
 
+" icon
+Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
+
+" startify
+Plug 'mhinz/vim-startify'
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -45,7 +52,10 @@ Plug 'chrisbra/unicode.vim'
 Plug 'mattn/emmet-vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'nvim-lua/plenary.nvim'
+
+" telescope
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
@@ -56,6 +66,7 @@ lua require("tree")
 lua require("tele")
 lua require("snip_config")
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync()
 
 "Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
