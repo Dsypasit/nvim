@@ -9,8 +9,8 @@ cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-			-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+			--vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
 			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
 			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 		end,
@@ -23,8 +23,8 @@ cmp.setup({
 		['<Up>'] = cmp.mapping.select_prev_item(select_opts),
 		['<Down>'] = cmp.mapping.select_next_item(select_opts),
 
-		['<C-k>'] = cmp.mapping.select_prev_item(select_opts),
-		['<C-j>'] = cmp.mapping.select_next_item(select_opts),
+		--['<C-k>'] = cmp.mapping.select_prev_item(select_opts),
+		--['<C-j>'] = cmp.mapping.select_next_item(select_opts),
 
 		['<C-u>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -69,9 +69,27 @@ cmp.setup({
 		end, { 'i', 's' }),
 	},
 	sources = {
-		{ name = 'path' },
+		{ name = 'luasnip' },
 		{ name = 'nvim_lsp' },
+		{ name = 'path' },
 		{ name = 'buffer', keyword_length = 3 },
-		{ name = 'luasnip', keyword_length = 2 },
 	}
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = 'buffer' }
+	}
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = 'path' }
+	}, {
+		{ name = 'cmdline' }
+	})
 })

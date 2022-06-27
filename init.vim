@@ -54,6 +54,7 @@ lua require('lsp_config')
 lua require('cmp_config')
 lua require("tree")
 lua require("tele")
+lua require("snip_config")
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
 
 "Find files using Telescope command-line sugar.
