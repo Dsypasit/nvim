@@ -24,12 +24,19 @@ Plug 'hrsh7th/vim-vsnip-integ'
 " nerdtree
 Plug 'preservim/nerdtree'
 
+" nvim-tree
+Plug 'kyazdani42/nvim-tree.lua'
+
 " icon
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 
-" startify
-Plug 'mhinz/vim-startify'
+" tele extension
+Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'nvim-telescope/telescope-project.nvim'
+
+" startup
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
@@ -58,6 +65,11 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" nvim-treesitter
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/playground'
+
 call plug#end()
 
 " lua
@@ -69,13 +81,19 @@ lua require("snip_config")
 "autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
 "autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync()
 
-"Find files using Telescope command-line sugar.
+"ind files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>bb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>tt <cmd>Telescope tags<cr>
 nnoremap <leader>gg <cmd>Telescope git_files<cr>
+nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+nnoremap <leader><leader> <cmd>Telescope file_browser<cr>
+nnoremap <leader>ww <cmd>lua require'telescope'.extensions.project.project{ display_type = 'full' }<cr>
+nnoremap <leader>wa <cmd>lua require 'telescope'.extensions.file_browser.file_browser({path='~/coding'})<cr>
+"nnoremap <leader>fj <cmd>Telescope file_browser path=~<cr>
+"nnoremap <leader>fk <cmd>Telescope find_files path=~<cr>
 
 " markdown
 let g:mkdp_browser = '/usr/bin/firefox'
@@ -122,11 +140,10 @@ autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 tnoremap <C-n> <C-\><C-n>
 syntax  on
-"set mouse=a
+set mouse=a
 set cursorline
 set ignorecase
 set title
-set autochdir
 set relativenumber
 nmap <F2> :set relativenumber!<cr>
 nmap <F4> :source ~/.config/nvim/init.vim<cr>
@@ -278,7 +295,12 @@ nnoremap <C-s><C-l> :ls<cr>:b
 noremap H ^
 noremap L $
 
-nnoremap <space>e :NERDTreeToggle<CR>
+" nerdtree
+autocmd BufEnter * lcd %:p:h
+set autochdir
+nnoremap <space>e :NvimTreeToggle <CR>
+
+
 
 " fzf
 nnoremap <Space>b :Buffers<cr>
@@ -299,7 +321,7 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " airline
-let g:airline_theme='hybrid'
+let g:airline_theme='base16_gruvbox_dark_hard'
 "let g:airline_focuslost_inactive = 0
 if ! has('gui_running')
   set ttimeoutlen=10
@@ -309,15 +331,17 @@ if ! has('gui_running')
 	au InsertLeave * set timeoutlen=1000
   augroup END
 endif
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
 " remove unused modes
 let g:airline_extensions = ['branch', 'fugitiveline', 'fzf']
+let g:airline_highlighting_cache = 1
 " empty third and fourth sections
 "let g:airline_section_c="%T"
-let g:airline_section_x=""
+"let g:airline_section_x=""
 " put filetype in fifth section
-let g:airline_section_y="%Y"
+"let g:airline_section_y="%Y"
 
 
 "nerdcommenter
