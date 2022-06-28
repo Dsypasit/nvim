@@ -17,6 +17,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 " snip
 Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
@@ -65,15 +66,15 @@ lua require('cmp_config')
 lua require("tree")
 lua require("tele")
 lua require("snip_config")
-autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
-autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync()
+"autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
+"autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync()
 
 "Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>bb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>ft <cmd>Telescope tags<cr>
+nnoremap <leader>tt <cmd>Telescope tags<cr>
 nnoremap <leader>gg <cmd>Telescope git_files<cr>
 
 " markdown
@@ -122,6 +123,7 @@ autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 tnoremap <C-n> <C-\><C-n>
 syntax  on
 "set mouse=a
+set cursorline
 set ignorecase
 set title
 set autochdir
@@ -245,7 +247,7 @@ nnoremap <C-j> <C-w>J
 nnoremap <C-k> <C-w>K
 nnoremap <C-l> <C-w>L
 nnoremap <C-h> <C-w>H
-nnoremap <Leader>t :vs\|:ter<CR>
+"nnoremap <Leader>t :vs\|:ter<CR>
 set splitbelow
 set splitright
 

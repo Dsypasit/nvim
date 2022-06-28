@@ -15,18 +15,29 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 	buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
 	buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+	buf_set_keymap('n', 'gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 	buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	buf_set_keymap('i', '<C-s>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 	buf_set_keymap('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-	buf_set_keymap('n', '[f', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	buf_set_keymap('n', ']f', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+	buf_set_keymap('n', '<Leader>df', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+	buf_set_keymap('n', '<Leader>dF', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+	buf_set_keymap('n', '<Leader>dd', ':Telescope diagnostics<CR>', opts)
 
 	-- Set some keybinds conditional on server capabilities
 	if client.resolved_capabilities.document_formatting then
-		buf_set_keymap("n", "ff", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+		buf_set_keymap("n", "<Leader>fF", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 	elseif client.resolved_capabilities.document_range_formatting then
-		buf_set_keymap("n", "ff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+		buf_set_keymap("n", "<Leader>fF", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+	end
+
+	-- auto save
+	if client.resolved_capabilities.document_formatting then
+		vim.api.nvim_command [[augroup Format]]
+		vim.api.nvim_command [[autocmd! * <buffer>]]
+		vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+		vim.api.nvim_command [[augroup END]]
 	end
 
 	-- Set autocommands conditional on server_capabilities
@@ -58,6 +69,7 @@ nvim_lsp.gopls.setup {
 	handlers = handlers,
 	-- for postfix snippets and analyzers
 	capabilities = capabilities,
+	on_attach = on_attach,
 	settings = {
 		gopls = {
 			experimentalPostfixCompletions = true,
@@ -66,10 +78,8 @@ nvim_lsp.gopls.setup {
 				shadow = true,
 			},
 			staticcheck = true,
-			usePlaceholders = true
 		},
 	},
-	on_attach = on_attach,
 }
 
 function goimports(timeoutms)
@@ -99,6 +109,10 @@ table.insert(runtime_path, "lua/?/init.lua")
 require 'lspconfig'.sumneko_lua.setup {
 	cmd = { "lua-language-server" },
 	single_file_support = true,
+	handlers = handlers,
+	-- for postfix snippets and analyzers
+	capabilities = capabilities,
+	on_attach = on_attach,
 	settings = {
 		Lua = {
 			format = {
@@ -128,5 +142,8 @@ require 'lspconfig'.sumneko_lua.setup {
 
 -- clang
 require 'lspconfig'.clangd.setup {
-
+	handlers = handlers,
+	-- for postfix snippets and analyzers
+	capabilities = capabilities,
+	on_attach = on_attach,
 }
