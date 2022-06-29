@@ -96,6 +96,10 @@ nnoremap <space>fc <cmd>Telescope file_browser cwd=~/coding<cr>
 
 nnoremap <space>sg <cmd>Telescope live_grep<cr>
 nnoremap <space>sw <cmd>Telescope grep_string<cr>
+
+nnoremap <space>gr <cmd>Telescope lsp_references<cr>
+nnoremap <space>gd <cmd>Telescope lsp_document_symbols<cr>
+
 "nnoremap <leader>fj <cmd>Telescope file_browser path=~<cr>
 "nnoremap <leader>fk <cmd>Telescope find_files path=~<cr>
 
@@ -124,7 +128,7 @@ let g:jsx_ext_required = 1
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 Dracu :colorscheme dracula 
 
-nnoremap <space>r :Rc<cr>
+nnoremap <space>r :w<cr>:Rc<cr>
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 autocmd FileType c command! -nargs=0 Rc :sp|:res -10|:term gcc %;./a.out
 autocmd FileType cpp command! -nargs=0 Rc :sp|:res -10|:term g++ %;./a.out
@@ -235,11 +239,11 @@ if has("gui_running")
 endif
 
 "fugitive
-nnoremap <Space>g :vert G<CR>
-nnoremap <Space>gc :GCheckout<CR>
-nnoremap <Space>gb :GBranches<CR>
-noremap gh :diffget //3<CR>
-noremap gu :diffget //2<cr>
+nnoremap <Space>gg :vert G<CR>
+"nnoremap <Space>gc :GCheckout<CR>
+"nnoremap <Space>gb :GBranches<CR>
+"noremap gh :diffget //3<CR>
+"noremap gu :diffget //2<cr>
 set diffopt+=vertical
 
 "golden viewer
@@ -304,7 +308,7 @@ noremap H ^
 noremap L $
 
 " nerdtree
-autocmd BufEnter * lcd %:p:h
+"autocmd BufEnter * lcd %:p:h
 set autochdir
 "nnoremap <space>e :NvimTreeToggle <CR>
 
