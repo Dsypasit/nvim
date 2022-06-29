@@ -10,7 +10,7 @@ local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 
 ls.config.set_config {
-	history = true,
+	history = false,
 
 	updateevents = 'TextChanged,TextChangedI',
 

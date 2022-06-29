@@ -72,7 +72,7 @@ nvim_lsp.gopls.setup {
 	on_attach = on_attach,
 	settings = {
 		gopls = {
-			experimentalPostfixCompletions = true,
+			experimentalPostfixCompletions = false,
 			analyses = {
 				unusedparams = true,
 				shadow = true,
@@ -142,6 +142,12 @@ require 'lspconfig'.sumneko_lua.setup {
 
 -- clang
 require 'lspconfig'.clangd.setup {
+	handlers = handlers,
+	-- for postfix snippets and analyzers
+	capabilities = capabilities,
+	on_attach = on_attach,
+}
+require 'lspconfig'.pyright.setup {
 	handlers = handlers,
 	-- for postfix snippets and analyzers
 	capabilities = capabilities,
