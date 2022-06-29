@@ -50,10 +50,11 @@ require('telescope').setup {
 			i = {
 				["<C-j>"] = actions.move_selection_next,
 				["<C-k>"] = actions.move_selection_previous,
-				["q"] = actions.close,
-			}
-		},
-		--initial_mode = "normal",
+			},
+			n = {
+				["<C-c>"] = actions.close,
+			},
+		}
 	},
 }
 

@@ -1,6 +1,8 @@
 require 'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all"
-	ensure_installed = { "c", "lua", "rust", "go" },
+	ensure_installed = { "c", "lua", "rust", "go", "bash", "css", "json", "dockerfile", "http", "javascript", "vim", "yaml",
+		"markdown", },
+	--ensure_installed = "all",
 	playground = {
 		enable = true,
 		disable = {},
@@ -33,6 +35,28 @@ require 'nvim-treesitter.configs'.setup {
 				["if"] = "@function.inner",
 				["ac"] = "@class.outer",
 				["ic"] = "@class.inner",
+				["ab"] = "@block.outer",
+				["ib"] = "@block.inner",
+			},
+		},
+		move = {
+			enable = true,
+			set_jumps = true, -- whether to set jumps in the jumplist
+			goto_next_start = {
+				["]f"] = "@function.outer",
+				["]c"] = "@class.outer",
+			},
+			goto_next_end = {
+				["]F"] = "@function.outer",
+				["]C"] = "@class.outer",
+			},
+			goto_previous_start = {
+				["[f"] = "@function.outer",
+				["[c"] = "@class.outer",
+			},
+			goto_previous_end = {
+				["[F"] = "@function.outer",
+				["[C"] = "@class.outer",
 			},
 		},
 	},
@@ -50,10 +74,10 @@ require 'nvim-treesitter.configs'.setup {
 	incremental_selection = {
 		enable = true,
 		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
+			init_selection = "<space>nn",
+			node_incremental = "<space>nj",
+			node_decremental = "<space>nk",
+			scope_incremental = "<space>nc",
 		},
 	},
 }

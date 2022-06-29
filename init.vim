@@ -82,18 +82,26 @@ lua require("snip_config")
 "autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync()
 
 "ind files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>bb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>tt <cmd>Telescope tags<cr>
-nnoremap <leader>gg <cmd>Telescope git_files<cr>
-nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
-nnoremap <leader><leader> <cmd>Telescope file_browser<cr>
-nnoremap <leader>ww <cmd>lua require'telescope'.extensions.project.project{ display_type = 'full' }<cr>
-nnoremap <leader>wa <cmd>lua require 'telescope'.extensions.file_browser.file_browser({path='~/coding'})<cr>
+nnoremap <space>tt <cmd>Telescope<cr>
+
+nnoremap <space>ff <cmd>Telescope find_files<cr>
+nnoremap <space>fb <cmd>Telescope buffers<cr>
+nnoremap <space>fh <cmd>Telescope help_tags<cr>
+nnoremap <space>ft <cmd>Telescope tags<cr>
+nnoremap <space>fg <cmd>Telescope git_files<cr>
+nnoremap <space>fo <cmd>Telescope oldfiles<cr>
+nnoremap <space><space> <cmd>Telescope file_browser<cr>
+"nnoremap <space>ww <cmd>lua require'telescope'.extensions.project.project{ display_type = 'full' }<cr>
+nnoremap <space>fc <cmd>Telescope file_browser cwd=~/coding<cr>
+
+nnoremap <space>sg <cmd>Telescope live_grep<cr>
+nnoremap <space>sw <cmd>Telescope grep_string<cr>
 "nnoremap <leader>fj <cmd>Telescope file_browser path=~<cr>
 "nnoremap <leader>fk <cmd>Telescope find_files path=~<cr>
+
+" treesitter
+"set foldmethod=expr
+"set foldexpr=nvim_treesitter#foldexpr()
 
 " markdown
 let g:mkdp_browser = '/usr/bin/firefox'
@@ -276,11 +284,11 @@ let maplocalleader="\\"
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 0
-map <Space>f <plug>(easymotion-bd-f)
-nmap <Space>f <plug>(easymotion-overwin-f)
+map <Space>ef <plug>(easymotion-bd-f)
+nmap <Space>ef <plug>(easymotion-overwin-f)
 
 "autosave
-nnoremap <Space>w :w<CR>
+nnoremap <Space>ww :w<CR>
 "exis
 nnoremap qq :qa 
 nnoremap <Space>q :q<CR> 
@@ -298,7 +306,7 @@ noremap L $
 " nerdtree
 autocmd BufEnter * lcd %:p:h
 set autochdir
-nnoremap <space>e :NvimTreeToggle <CR>
+"nnoremap <space>e :NvimTreeToggle <CR>
 
 
 
