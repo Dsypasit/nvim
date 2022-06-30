@@ -64,12 +64,15 @@ local handlers = {
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' }),
 }
 
+local util = require "lspconfig/util"
+
 nvim_lsp.gopls.setup {
-	cmd = { 'gopls' },
 	handlers = handlers,
-	-- for postfix snippets and analyzers
 	capabilities = capabilities,
 	on_attach = on_attach,
+	cmd = { "gopls", "serve" },
+	filetypes = { "go", "gomod" },
+	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 	settings = {
 		gopls = {
 			experimentalPostfixCompletions = false,

@@ -9,7 +9,7 @@ local has_words_before = function()
 end
 
 local select_opts = { behavior = cmp.SelectBehavior.Select }
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect', }
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 cmp.setup({
 	preselect = cmp.PreselectMode.None,
 	completion = {
@@ -31,8 +31,8 @@ cmp.setup({
 		--['<c-k>'] = cmp.mapping.select_prev_item(select_opts),
 		--['<c-j>'] = cmp.mapping.select_next_item(select_opts),
 
-		--['<c-n>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts)),
-		--['<c-p>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts)),
+		['<c-n>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts)),
+		['<c-p>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts)),
 
 		['<c-u>'] = cmp.mapping.scroll_docs(-4),
 		['<c-f>'] = cmp.mapping.scroll_docs(4),
@@ -59,8 +59,8 @@ cmp.setup({
 		["<tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item(select_opts)
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
+				--elseif luasnip.expand_or_jumpable() then
+				--luasnip.expand_or_jump()
 			elseif has_words_before() then
 				cmp.complete()
 			else
@@ -71,8 +71,8 @@ cmp.setup({
 		["<s-tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item(select_opts)
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
+				--elseif luasnip.jumpable(-1) then
+				--luasnip.jump(-1)
 			else
 				fallback()
 			end

@@ -69,6 +69,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " nvim-treesitter
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/playground'
+Plug 'RRethy/nvim-treesitter-textsubjects'
 
 call plug#end()
 
@@ -115,7 +116,7 @@ let g:ruby_host_prog = '/usr/bin/ruby'
 let g:user_emmet_mode='a'
 let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 "let g:user_emmet_install_global = 0
-let g:user_emmet_leader_key=','
+let g:user_emmet_leader_key='<C-,>'
 
 au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
@@ -153,7 +154,7 @@ autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 tnoremap <C-n> <C-\><C-n>
 syntax  on
 set mouse=a
-set cursorline
+"set cursorline
 set ignorecase
 set title
 set relativenumber
@@ -202,7 +203,6 @@ function! DelTagOfFile(file)
   let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
   let resp = system(cmd)
 endfunction
-
 function! UpdateTags()
   let f = expand("%:p")
   let cwd = getcwd()
