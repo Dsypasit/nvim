@@ -8,6 +8,7 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp-status.nvim'
 " cmp
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -65,6 +66,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 " nvim-treesitter
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -86,6 +88,8 @@ lua require("snip_config")
 nnoremap <space>tt <cmd>Telescope<cr>
 
 nnoremap <space>ff <cmd>Telescope find_files<cr>
+nnoremap <C-f> <cmd>Telescope find_files<cr>
+nnoremap <C-b> <cmd>Telescope buffers<cr>
 nnoremap <space>fb <cmd>Telescope buffers<cr>
 nnoremap <space>fh <cmd>Telescope help_tags<cr>
 nnoremap <space>ft <cmd>Telescope tags<cr>
@@ -93,13 +97,36 @@ nnoremap <space>fg <cmd>Telescope git_files<cr>
 nnoremap <space>fo <cmd>Telescope oldfiles<cr>
 nnoremap <space><space> <cmd>Telescope file_browser<cr>
 "nnoremap <space>ww <cmd>lua require'telescope'.extensions.project.project{ display_type = 'full' }<cr>
-nnoremap <space>fc <cmd>Telescope file_browser cwd=~/coding<cr>
+nnoremap <space>fd <cmd>Telescope file_browser cwd=~/coding<cr>
+nnoremap <space>fn <cmd>Telescope find_files cwd=~/.config/nvim/<cr>
+nnoremap <space>fc <cmd>Telescope find_files cwd=~/dotfile<cr>
+nnoremap <space>fw <cmd>:Window<cr>
 
-nnoremap <space>sg <cmd>Telescope live_grep<cr>
+noremap <space>ss <cmd>Telescope live_grep<cr>
 nnoremap <space>sw <cmd>Telescope grep_string<cr>
 
 nnoremap <space>gr <cmd>Telescope lsp_references<cr>
 nnoremap <space>gd <cmd>Telescope lsp_document_symbols<cr>
+
+
+
+" Go to tab by number
+noremap <Space>1 1gt
+noremap <Space>2 2gt
+noremap <Space>3 3gt
+noremap <Space>4 4gt
+noremap <Space>5 5gt
+noremap <Space>6 6gt
+noremap <Space>7 7gt
+noremap <Space>8 8gt
+noremap <Space>9 9gt
+noremap <Space>0 :tablast<cr>
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+nnoremap <Leader>t     :tabnew<CR>
+
+map <Esc> <ESC>:noh<Cr>
+
 
 "nnoremap <leader>fj <cmd>Telescope file_browser path=~<cr>
 "nnoremap <leader>fk <cmd>Telescope find_files path=~<cr>
@@ -147,7 +174,7 @@ let g:go_highlight_operators = 1
 let g:go_auto_type_info = 2
 let g:go_list_type = "quickfix"
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.go lua goimports(1000)
+autocmd BufWritePre *.go lua OrgImports(1000)
 autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 "au filetype go inoremap <buffer> . .<C-x><C-o>
 
@@ -159,6 +186,7 @@ set ignorecase
 set title
 set relativenumber
 nmap <F2> :set relativenumber!<cr>
+nmap <F3> :set cursorline!<cr>
 nmap <F4> :source ~/.config/nvim/init.vim<cr>
 set encoding=utf-8
 set fileencodings=utf-8
@@ -292,12 +320,12 @@ map <Space>ef <plug>(easymotion-bd-f)
 nmap <Space>ef <plug>(easymotion-overwin-f)
 
 "autosave
-nnoremap <Space>ww :w<CR>
+nnoremap <Space>w :w<CR>
 "exis
 nnoremap qq :qa 
 nnoremap <Space>q :q<CR> 
 
-inoremap <C-c> <Esc>
+map <C-c> <Esc>:noh<Cr>
 noremap <Space>y "+y
 
 nnoremap <C-s><C-j> :bp<cr>
@@ -343,18 +371,12 @@ if ! has('gui_running')
 	au InsertLeave * set timeoutlen=1000
   augroup END
 endif
-let g:airline#extensions#tabline#enabled = 1
-"let g:airline_left_sep=''
-"let g:airline_right_sep=''
-" remove unused modes
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_extensions = ['branch', 'fugitiveline', 'fzf']
 let g:airline_highlighting_cache = 1
-" empty third and fourth sections
-"let g:airline_section_c="%T"
-"let g:airline_section_x=""
-" put filetype in fifth section
-"let g:airline_section_y="%Y"
-
+let g:airline_powerline_fonts = 1
+source ~/.config/nvim/statusline.vim
 
 "nerdcommenter
 

@@ -2,7 +2,6 @@ local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local utils = require "telescope.utils"
 
-require 'telescope'.load_extension('project')
 require('telescope').setup {
 	extensions = {
 		fzf = {
@@ -43,7 +42,23 @@ require('telescope').setup {
 				'~/dotfile'
 			},
 			hidden_files = true, -- default: false
+		},
+		["ui-select"] = {
+			require("telescope.themes").get_cursor {
+
+			}
 		}
+	},
+	pickers = {
+		lsp_code_actions = {
+			theme = "cursor",
+		},
+		code_action = {
+			theme = "cursor",
+		},
+		lsp_workspace_diagnostics = {
+			theme = "dropdown",
+		},
 	},
 	defaults = {
 		mappings = {
@@ -60,3 +75,5 @@ require('telescope').setup {
 
 require("telescope").load_extension "file_browser"
 require("telescope").load_extension "fzf"
+require("telescope").load_extension "ui-select"
+require 'telescope'.load_extension('project')

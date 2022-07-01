@@ -14,7 +14,7 @@ local on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true }
 	buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 	buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-	buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+	buf_set_keymap('n', '<space>a', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 	buf_set_keymap('n', 'gt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 	buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 	buf_set_keymap('i', '<C-s>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -75,7 +75,7 @@ nvim_lsp.gopls.setup {
 	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 	settings = {
 		gopls = {
-			experimentalPostfixCompletions = false,
+			experimentalPostfixCompletions = true,
 			analyses = {
 				unusedparams = true,
 				shadow = true,
@@ -85,7 +85,7 @@ nvim_lsp.gopls.setup {
 	},
 }
 
-function goimports(timeoutms)
+function OrgImports(wait_ms)
 	local params = vim.lsp.util.make_range_params()
 	params.context = { only = { "source.organizeImports" } }
 	local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
