@@ -1,6 +1,7 @@
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local utils = require "telescope.utils"
+local fb_actions = require "telescope".extensions.file_browser.actions
 
 require('telescope').setup {
 	extensions = {
@@ -28,7 +29,10 @@ require('telescope').setup {
 						end
 						require("telescope._extensions.file_browser.utils").redraw_border_title(current_picker)
 						current_picker:refresh(finder, { reset_prompt = true, multi = current_picker._multi })
-					end
+					end,
+					["<C-t>"] = require "telescope.actions".select_tab,
+					["<C-e>"] = fb_actions.create,
+					["<C-m>"] = fb_actions.goto_home_dir
 				},
 				["n"] = {
 					-- your custom normal mode mappings
@@ -65,6 +69,7 @@ require('telescope').setup {
 			i = {
 				["<C-j>"] = actions.move_selection_next,
 				["<C-k>"] = actions.move_selection_previous,
+				["<C-c>"] = actions.close,
 			},
 			n = {
 				["<C-c>"] = actions.close,

@@ -31,8 +31,8 @@ cmp.setup({
 		--['<c-k>'] = cmp.mapping.select_prev_item(select_opts),
 		--['<c-j>'] = cmp.mapping.select_next_item(select_opts),
 
-		['<c-n>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts)),
-		['<c-p>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts)),
+		--['<c-n>'] = cmp.mapping(cmp.mapping.select_next_item(select_opts)),
+		--['<c-p>'] = cmp.mapping(cmp.mapping.select_prev_item(select_opts)),
 
 		['<c-u>'] = cmp.mapping.scroll_docs(-4),
 		['<c-f>'] = cmp.mapping.scroll_docs(4),

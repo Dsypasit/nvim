@@ -37,7 +37,13 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-telescope/telescope-project.nvim'
 
-" startup
+" golang
+Plug 'vim-test/vim-test'
+"Plug 'ray-x/go.nvim'
+"Plug 'ray-x/guihua.lua'
+
+" floatterm
+Plug 'voldikss/vim-floaterm'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
@@ -181,6 +187,7 @@ autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 tnoremap <C-n> <C-\><C-n>
 syntax  on
 set mouse=a
+set updatetime=500
 "set cursorline
 set ignorecase
 set title
@@ -231,15 +238,15 @@ function! DelTagOfFile(file)
   let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
   let resp = system(cmd)
 endfunction
-function! UpdateTags()
-  let f = expand("%:p")
-  let cwd = getcwd()
-  let tagfilename = cwd . "/tags"
-  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
-  call DelTagOfFile(f)
-  let resp = system(cmd)
-endfunction
-autocmd BufWritePost *.cpp,*.h,*.c,*.go,*.py call UpdateTags()
+"function! UpdateTags()
+  "let f = expand("%:p")
+  "let cwd = getcwd()
+  "let tagfilename = cwd . "/tags"
+  "let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+  "call DelTagOfFile(f)
+  "let resp = system(cmd)
+"endfunction
+"autocmd BufWritePost *.cpp,*.h,*.c,*.go,*.py call UpdateTags()
 
 function! PlugLoaded(name)
     return (
@@ -252,10 +259,13 @@ endfunction
 set termguicolors
 colorscheme gruvbox 
 let g:gruvbox_transparent_bg=1
-let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_bold=0
 set background=dark
 highlight normal     ctermbg=none guibg=none
 highlight SignColumn guibg=none ctermbg=none
+set signcolumn=yes
+
 "autocmd VimEnter * hi Normal ctermbg=none guibg=none
 "highlight LineNr     ctermfg=NONE guifg=NONE
 "highlight SignColumn ctermbg=NONE guibg=NONE
@@ -325,7 +335,7 @@ nnoremap <Space>w :w<CR>
 nnoremap qq :qa 
 nnoremap <Space>q :q<CR> 
 
-map <C-c> <Esc>:noh<Cr>
+inoremap <C-c> <Esc>:noh<Cr>
 noremap <Space>y "+y
 
 nnoremap <C-s><C-j> :bp<cr>
@@ -338,7 +348,7 @@ noremap L $
 " nerdtree
 "autocmd BufEnter * lcd %:p:h
 set autochdir
-"nnoremap <space>e :NvimTreeToggle <CR>
+nmap <space>ee :NERDTreeFind<CR>
 
 
 

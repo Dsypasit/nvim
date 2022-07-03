@@ -1,9 +1,23 @@
 local nvim_lsp = require('lspconfig')
+require("Completion")
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local on_attach = function(client, bufnr)
+	vim.api.nvim_create_autocmd("CursorHold", {
+		buffer = bufnr,
+		callback = function()
+			local opts = {
+				focusable = false,
+				close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+				border = 'rounded',
+				source = 'always',
+				scope = 'cursor',
+			}
+			vim.diagnostic.open_float(nil, opts)
+		end
+	})
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
 	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -21,8 +35,11 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 	buf_set_keymap('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-	buf_set_keymap('n', '<space>df', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	buf_set_keymap('n', '<space>dF', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+	buf_set_keymap('n', '<space>df', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
+		opts)
+	buf_set_keymap('n', '<space>dF', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
+		opts)
+	buf_set_keymap('n', '<space>dj', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false, border = "rounded"})<CR>', opts)
 	buf_set_keymap('n', '<space>dd', ':Telescope diagnostics<CR>', opts)
 
 	-- Set some keybinds conditional on server capabilities
@@ -42,16 +59,24 @@ local on_attach = function(client, bufnr)
 
 	-- Set autocommands conditional on server_capabilities
 	if client.resolved_capabilities.document_highlight then
-		vim.api.nvim_exec([[
-	hi LspReferenceRead cterm=bold ctermbg=none guibg=none
-      hi LspReferenceText cterm=bold ctermbg=none guibg=none
-      hi LspReferenceWrite cterm=bold ctermbg=none guibg=none
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
+		if client.resolved_capabilities.document_highlight then
+			vim.cmd [[
+      hi! LspReferenceRead cterm=bold ctermbg=239 guibg=#503935
+      hi! LspReferenceText cterm=bold ctermbg=239 guibg=#503935
+      hi! LspReferenceWrite cterm=bold ctermbg=239 guibg=#503935
+    ]]
+			vim.api.nvim_create_augroup('lsp_document_highlight', {})
+			vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+				group = 'lsp_document_highlight',
+				buffer = 0,
+				callback = vim.lsp.buf.document_highlight,
+			})
+			vim.api.nvim_create_autocmd('CursorMoved', {
+				group = 'lsp_document_highlight',
+				buffer = 0,
+				callback = vim.lsp.buf.clear_references,
+			})
+		end
 	end
 end
 
@@ -84,6 +109,16 @@ nvim_lsp.gopls.setup {
 		},
 	},
 }
+
+--require('go').setup({
+---- other setups ....
+--run_in_floaterm = true,
+--lsp_cfg = {
+--capabilities = capabilities,
+--handlers = handlers,
+--on_attach = on_attach,
+--},
+--})
 
 function OrgImports(wait_ms)
 	local params = vim.lsp.util.make_range_params()
@@ -156,6 +191,7 @@ require 'lspconfig'.pyright.setup {
 	capabilities = capabilities,
 	on_attach = on_attach,
 }
+
 require("nvim-tree").setup({
 	sort_by = "case_sensitive",
 	view = {
