@@ -371,7 +371,7 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " airline
-let g:airline_theme='base16_gruvbox_dark_medium'
+let g:airline_theme='base16_gruvbox_dark_hard'
 "let g:airline_focuslost_inactive = 0
 "if ! has('gui_running')
   "set ttimeoutlen=10
@@ -381,14 +381,12 @@ let g:airline_theme='base16_gruvbox_dark_medium'
 	"au InsertLeave * set timeoutlen=1000
   "augroup END
 "endif
-"let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_extensions = ['branch', 'fugitiveline', 'fzf']
-let g:airline#extensions#nvimlsp#enabled = 1
+let g:airline_extensions = ['branch', 'fugitiveline', 'fzf', 'tabline']
 let g:airline_highlighting_cache = 1
-"let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 "let g:airline_section_c = '%t'
-source ~/.config/nvim/statusline.vim
+"source ~/.config/nvim/statusline.vim
 
 "nerdcommenter
 
