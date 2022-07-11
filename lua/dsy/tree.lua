@@ -1,8 +1,11 @@
 require 'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all"
 	ensure_installed = { "c", "lua", "rust", "go", "bash", "css", "json", "dockerfile", "http", "javascript", "vim", "yaml",
-		"markdown", },
+		"markdown", "http", "json", "cpp", "gomod", "tsx", "typescript", "vue", "javascript" },
 	--ensure_installed = "all",
+	autotag = {
+		enable = true,
+	},
 	playground = {
 		enable = true,
 		disable = { "markdown" },

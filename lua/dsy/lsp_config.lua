@@ -100,25 +100,13 @@ nvim_lsp.gopls.setup {
 	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 	settings = {
 		gopls = {
-			experimentalPostfixCompletions = true,
 			analyses = {
 				unusedparams = true,
-				shadow = true,
 			},
 			staticcheck = true,
 		},
 	},
 }
-
---require('go').setup({
----- other setups ....
---run_in_floaterm = true,
---lsp_cfg = {
---capabilities = capabilities,
---handlers = handlers,
---on_attach = on_attach,
---},
---})
 
 function OrgImports(wait_ms)
 	local params = vim.lsp.util.make_range_params()
@@ -209,3 +197,28 @@ require("nvim-tree").setup({
 		dotfiles = true,
 	},
 })
+
+require 'lspconfig'.html.setup {
+	handlers = handlers,
+	capabilities = capabilities,
+	on_attach = on_attach,
+
+}
+
+require('lspconfig').yamlls.setup {
+	handlers = handlers,
+	capabilities = capabilities,
+	on_attach = on_attach,
+	-- other configuration for setup {}
+	settings = {
+		yaml = {
+			-- other settings. note this overrides the lspconfig defaults.
+			schemas = {
+				["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+				["../path/relative/to/file.yml"] = "/.github/workflows/*",
+				["/path/from/root/of/project"] = "/.github/workflows/*",
+				["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] = "/*.k8s.yaml",
+			},
+		},
+	}
+}

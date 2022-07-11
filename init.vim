@@ -22,6 +22,12 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
+" nvim plug
+Plug 'NTBBloodbath/rest.nvim'
+Plug 'petertriho/nvim-scrollbar'
+Plug 'kevinhwang91/nvim-hlslens'
+Plug 'karb94/neoscroll.nvim'
+
 " nerdtree
 Plug 'preservim/nerdtree'
 
@@ -45,6 +51,9 @@ Plug 'vim-test/vim-test'
 " floatterm
 Plug 'voldikss/vim-floaterm'
 
+" startup
+Plug 'goolord/alpha-nvim'
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -67,6 +76,7 @@ Plug 'chrisbra/unicode.vim'
 Plug 'mattn/emmet-vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'kien/ctrlp.vim'
 
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
@@ -78,15 +88,12 @@ Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/playground'
 Plug 'RRethy/nvim-treesitter-textsubjects'
+Plug 'windwp/nvim-ts-autotag'
 
 call plug#end()
 
 " lua
-lua require('lsp_config')
-lua require('cmp_config')
-lua require("tree")
-lua require("tele")
-lua require("snip_config")
+lua require("dsy")
 "autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
 "autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync()
 
@@ -113,6 +120,9 @@ nnoremap <space>sw <cmd>Telescope grep_string<cr>
 
 nnoremap <space>gr <cmd>Telescope lsp_references<cr>
 nnoremap <space>gd <cmd>Telescope lsp_document_symbols<cr>
+
+" rest
+nnoremap <space>rh <Plug>RestNvim<cr>
 
 
 
@@ -149,12 +159,12 @@ let g:ruby_host_prog = '/usr/bin/ruby'
 let g:user_emmet_mode='a'
 let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 "let g:user_emmet_install_global = 0
-let g:user_emmet_leader_key='<C-,>'
+"let g:user_emmet_leader_key='<C-,>'
 
 au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
-autocmd Filetype yaml,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
+"autocmd Filetype yaml,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
@@ -162,7 +172,6 @@ let g:jsx_ext_required = 1
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 Dracu :colorscheme dracula 
 
-nnoremap <space>r :w<cr>:Rc<cr>
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 autocmd FileType c command! -nargs=0 Rc :sp|:res -10|:term gcc %;./a.out
 autocmd FileType cpp command! -nargs=0 Rc :sp|:res -10|:term g++ %;./a.out
@@ -211,6 +220,7 @@ set nowritebackup
 set wildmenu
 set autoread
 set autowrite
+set formatoptions -=cro
 filetype on
 filetype plugin indent on
 
@@ -338,9 +348,11 @@ nnoremap <Space>q :q<CR>
 inoremap <C-c> <Esc>:noh<Cr>
 noremap <Space>y "+y
 
+" buffer
 nnoremap <C-s><C-j> :bp<cr>
 nnoremap <C-s><C-k> :bn<cr>
 nnoremap <C-s><C-l> :ls<cr>:b
+nnoremap <C-s><C-d> :w <bar> %bd <bar> e# <bar> bd# <CR>
 
 noremap H ^
 noremap L $
@@ -371,20 +383,12 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " airline
-let g:airline_theme='base16_gruvbox_dark_hard'
-"let g:airline_focuslost_inactive = 0
-"if ! has('gui_running')
-  "set ttimeoutlen=10
-  "augroup FastEscape
-	"autocmd!
-	"au InsertEnter * set timeoutlen=0
-	"au InsertLeave * set timeoutlen=1000
-  "augroup END
-"endif
+let g:airline_theme='ayu_dark'
 "let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_extensions = ['branch', 'fugitiveline', 'fzf', 'tabline']
+let g:airline_extensions = ['branch', 'fugitiveline', 'fzf', 'tabline' ]
 let g:airline_highlighting_cache = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 "let g:airline_section_c = '%t'
 "source ~/.config/nvim/statusline.vim
 
@@ -539,3 +543,21 @@ let g:NERDCompactSexyComs = 1
 "nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 "" Resume latest coc list.
 "nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+command -nargs=* -range GoAddTags call Gomodifytags(<line1>, <line2>, <count>, '-add-tags', <f-args>)
+
+" https://www.sobyte.net/post/2022-01/vim-go-struct-tag/
+function Gomodifytags(s,e,c,cmd,...)
+        let path = expand('%p')
+        if a:c < 0
+                execute 'normal va{^['
+                let range = line("'<").",".line("'>")
+        else
+                let range = a:s.",".a:e
+        end
+		for i in a:000
+			call system('gomodifytags '.a:cmd.' '.i.' -file '.path.' -line '.range.' -w '.join(a:000, ' '))
+		endfor
+		 execute "e "
+endfunction
+

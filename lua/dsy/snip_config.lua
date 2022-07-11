@@ -37,7 +37,7 @@ vim.keymap.set({ "i", "s" }, "<c-j>", function()
 	end
 end, { silent = true })
 
-vim.keymap.set("i", "<c-l>", function()
+vim.keymap.set("i", "<c-L>", function()
 	if ls.choice_active() then
 		ls.change_choice(1)
 	end
@@ -50,7 +50,6 @@ ls.add_snippets("go", {
 	s("ie", fmt([[
 		if err != nil {{
 			{}
-			return err
 		}}
 	]], {
 		i(1),
