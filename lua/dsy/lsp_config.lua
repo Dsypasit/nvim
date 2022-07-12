@@ -1,5 +1,5 @@
 local nvim_lsp = require('lspconfig')
-require("Completion")
+require("dsy.Completion")
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true

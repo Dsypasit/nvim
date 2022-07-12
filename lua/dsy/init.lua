@@ -40,8 +40,8 @@ vim.cmd([[
 
 require('neoscroll').setup()
 
-require('lsp_config')
-require('cmp_config')
-require("tree")
-require("tele")
-require("snip_config")
+require('dsy.lsp_config')
+require('dsy.cmp_config')
+require("dsy.tree")
+require("dsy.tele")
+require("dsy.snip_config")
