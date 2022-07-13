@@ -2,6 +2,7 @@ require('luasnip.loaders.from_vscode').lazy_load()
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+local lspkind = require('lspkind')
 
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -12,6 +13,18 @@ local select_opts = { behavior = cmp.SelectBehavior.Select }
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 cmp.setup({
 	preselect = cmp.PreselectMode.None,
+	formatting = {
+		format = lspkind.cmp_format({
+			maxwidth = 50,
+			mode = 'symbol_text',
+			menu = ({
+				buffer = "[Buffer]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[Snippet]",
+				path = "[Path]"
+			})
+		})
+	},
 	completion = {
 		completeopt = 'menu,menuone,noselect'
 	},

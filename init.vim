@@ -9,6 +9,7 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 " lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp-status.nvim'
+Plug 'onsails/lspkind.nvim'
 " cmp
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -27,6 +28,7 @@ Plug 'NTBBloodbath/rest.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
 Plug 'karb94/neoscroll.nvim'
+Plug 'romgrk/barbar.nvim'
 
 " nerdtree
 Plug 'preservim/nerdtree'
@@ -384,11 +386,10 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " airline
 let g:airline_theme='ayu_dark'
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_extensions = ['branch', 'fugitiveline', 'fzf', 'tabline' ]
+let g:airline_extensions = ['branch', 'fugitiveline', 'fzf' ]
+let g:airline#extensions#tabline#enabled = 0
 let g:airline_highlighting_cache = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 "let g:airline_section_c = '%t'
 "source ~/.config/nvim/statusline.vim
 
