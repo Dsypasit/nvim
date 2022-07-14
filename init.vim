@@ -28,7 +28,7 @@ Plug 'NTBBloodbath/rest.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
 Plug 'karb94/neoscroll.nvim'
-Plug 'romgrk/barbar.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
 " nerdtree
 Plug 'preservim/nerdtree'
@@ -141,7 +141,7 @@ noremap <Space>9 9gt
 noremap <Space>0 :tablast<cr>
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
-nnoremap <Leader>t     :tabnew<CR>
+nnoremap <Leader>t     :tabnew .<CR>
 
 map <Esc> <ESC>:noh<Cr>
 
@@ -362,7 +362,7 @@ noremap L $
 " nerdtree
 "autocmd BufEnter * lcd %:p:h
 set autochdir
-nmap <space>ee :NERDTreeFind<CR>
+nmap <space>ee :NvimTreeFindFile!<CR>
 
 
 
