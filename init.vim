@@ -10,6 +10,7 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp-status.nvim'
 Plug 'onsails/lspkind.nvim'
+Plug 'ray-x/lsp_signature.nvim'
 " cmp
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -345,7 +346,7 @@ nmap <Space>ef <plug>(easymotion-overwin-f)
 nnoremap <Space>w :w<CR>
 "exis
 nnoremap qq :qa 
-nnoremap <Space>q :q<CR> 
+nnoremap <Space>q :bd<CR> 
 
 inoremap <C-c> <Esc>:noh<Cr>
 noremap <Space>y "+y

@@ -1,6 +1,6 @@
 local ls = require('luasnip')
 local type = require('luasnip.util.types')
-require("luasnip.session.snippet_collection").clear_snippets "go"
+--require("luasnip.session.snippet_collection").clear_snippets "go"
 
 local s = ls.s
 local i = ls.insert_node
@@ -48,22 +48,22 @@ end)
 ls.add_snippets("go", {
 	s("f", fmt("func {}({}) {} {{\n\t{}\n}}", { i(1, "name"), i(2), i(3), i(0) })),
 	s("ie", fmt([[
-		if err != nil {{
-			{}
-		}}
-	]], {
+if err != nil {{
+{}
+}}
+]], {
 		i(1),
 	})),
 	s("pr", fmt([[
-		fmt.Printf("{}"{})
-	]], {
+fmt.Printf("{}"{})
+]], {
 		i(1), i(2)
 	})),
 	s("st", fmt([[
-		type {} struct {{
-			{}
-		}}
-	]], {
+type {} struct {{
+{}
+}}
+]], {
 		i(1, "name"), i(2)
 	})),
 })

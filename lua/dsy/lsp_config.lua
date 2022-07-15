@@ -4,6 +4,8 @@ require("dsy.Completion")
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+require "lsp_signature".setup()
+
 local on_attach = function(client, bufnr)
 	vim.api.nvim_create_autocmd("CursorHold", {
 		buffer = bufnr,
@@ -18,6 +20,12 @@ local on_attach = function(client, bufnr)
 			vim.diagnostic.open_float(nil, opts)
 		end
 	})
+	require "lsp_signature".on_attach({
+		bind = true, -- This is mandatory, otherwise border config won't get registered.
+		handler_opts = {
+			border = "rounded"
+		}
+	}, bufnr)
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
 	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
