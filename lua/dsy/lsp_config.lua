@@ -213,6 +213,17 @@ require 'lspconfig'.html.setup {
 
 }
 
+require 'lspconfig'.solargraph.setup {
+	handlers = handlers,
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+		solargraph = {
+			diagnostics = true
+		}
+	}
+}
+
 require('lspconfig').yamlls.setup {
 	handlers = handlers,
 	capabilities = capabilities,

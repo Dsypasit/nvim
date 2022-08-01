@@ -11,6 +11,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp-status.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'simrat39/symbols-outline.nvim'
 " cmp
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -28,7 +29,7 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'NTBBloodbath/rest.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
-Plug 'karb94/neoscroll.nvim'
+Plug 'karb94/neoscroll.nvim' "smoot scolling
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
 " nerdtree
@@ -50,6 +51,7 @@ Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'vim-test/vim-test'
 "Plug 'ray-x/go.nvim'
 "Plug 'ray-x/guihua.lua'
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " floatterm
 Plug 'voldikss/vim-floaterm'
@@ -57,6 +59,7 @@ Plug 'voldikss/vim-floaterm'
 " startup
 Plug 'goolord/alpha-nvim'
 
+Plug 'morhetz/gruvbox'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -72,7 +75,6 @@ Plug 'kana/vim-arpeggio'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdcommenter'
 Plug 'chrisbra/unicode.vim'
@@ -127,6 +129,9 @@ nnoremap <space>gd <cmd>Telescope lsp_document_symbols<cr>
 " rest
 nnoremap <space>rh <Plug>RestNvim<cr>
 
+" float
+nnoremap <space>tf :FloatermNew<cr>
+
 
 
 " Go to tab by number
@@ -167,6 +172,7 @@ let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
+autocmd BufNewFile,BufRead *.gohtml set filetype=html
 "autocmd Filetype yaml,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
@@ -182,16 +188,8 @@ autocmd FileType python command! -nargs=0 Rc :sp|:res -10|:term python3 % <cr>i
 autocmd FileType go command! -nargs=0 Rc :sp|:res -10|:term go run % <cr>i
 
 " golang
-let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
-let g:go_auto_type_info = 2
-let g:go_list_type = "quickfix"
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+let g:go_gopls_enabled=0
+"autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua OrgImports(1000)
 autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 "au filetype go inoremap <buffer> . .<C-x><C-o>
@@ -223,7 +221,7 @@ set nowritebackup
 set wildmenu
 set autoread
 set autowrite
-set formatoptions -=cro
+set formatoptions-=cro
 filetype on
 filetype plugin indent on
 
@@ -347,6 +345,7 @@ nnoremap <Space>w :w<CR>
 "exis
 nnoremap qq :qa 
 nnoremap <Space>q :bd<CR> 
+nnoremap <Space>x :q<CR> 
 
 inoremap <C-c> <Esc>:noh<Cr>
 noremap <Space>y "+y
