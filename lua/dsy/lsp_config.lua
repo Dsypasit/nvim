@@ -174,14 +174,24 @@ require 'lspconfig'.sumneko_lua.setup {
 	},
 }
 
--- clang
+--clang
 require 'lspconfig'.clangd.setup {
 	handlers = handlers,
 	-- for postfix snippets and analyzers
+	cmd = { "clangd" },
 	capabilities = capabilities,
 	on_attach = on_attach,
 }
-require 'lspconfig'.pyright.setup {
+
+
+--require 'lspconfig'.pyright.setup {
+--handlers = handlers,
+---- for postfix snippets and analyzers
+--capabilities = capabilities,
+--on_attach = on_attach,
+--}
+
+require 'lspconfig'.jedi_language_server.setup {
 	handlers = handlers,
 	-- for postfix snippets and analyzers
 	capabilities = capabilities,
@@ -210,7 +220,39 @@ require 'lspconfig'.html.setup {
 	handlers = handlers,
 	capabilities = capabilities,
 	on_attach = on_attach,
+}
 
+require 'lspconfig'.rust_analyzer.setup {
+	handlers = handlers,
+	capabilities = capabilities,
+	on_attach = on_attach,
+}
+
+
+require('rust-tools').setup {
+	tools = { -- rust-tools options
+		autoSetHints = true,
+		hover_with_actions = true,
+		inlay_hints = {
+			show_parameter_hints = false,
+			parameter_hints_prefix = "",
+			other_hints_prefix = "",
+		},
+	},
+	server = {
+		-- on_attach is a callback called when the language server attachs to the buffer
+		on_attach = on_attach,
+		settings = {
+			-- to enable rust-analyzer settings visit:
+			-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+			["rust-analyzer"] = {
+				-- enable clippy on save
+				checkOnSave = {
+					command = "clippy"
+				},
+			}
+		}
+	},
 }
 
 require 'lspconfig'.solargraph.setup {
@@ -219,7 +261,7 @@ require 'lspconfig'.solargraph.setup {
 	on_attach = on_attach,
 	settings = {
 		solargraph = {
-			diagnostics = true
+			diagnostics = false
 		}
 	}
 }

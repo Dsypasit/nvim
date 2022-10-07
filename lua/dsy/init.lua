@@ -47,7 +47,7 @@ require("dsy.tele")
 require("dsy.snip_config")
 require("bufferline").setup {
 	options = {
-		mode = 'buffers',
+		mode = 'tabs',
 		diagnostics = "nvim_lsp",
 		indicator_icon = '▎',
 		buffer_close_icon = '',

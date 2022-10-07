@@ -44,7 +44,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 " tele extension
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-project.nvim'
 
 " golang
@@ -85,7 +85,6 @@ Plug 'kien/ctrlp.vim'
 
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 
@@ -94,6 +93,9 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/playground'
 Plug 'RRethy/nvim-treesitter-textsubjects'
 Plug 'windwp/nvim-ts-autotag'
+
+" rust
+Plug 'simrat39/rust-tools.nvim'
 
 call plug#end()
 
@@ -160,7 +162,7 @@ map <Esc> <ESC>:noh<Cr>
 "set foldexpr=nvim_treesitter#foldexpr()
 
 " markdown
-let g:mkdp_browser = '/usr/bin/firefox'
+let g:mkdp_browser = '/snap/bin/firefox'
 
 let g:ruby_host_prog = '/usr/bin/ruby'
 
@@ -173,7 +175,7 @@ au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
 autocmd BufNewFile,BufRead *.gohtml set filetype=html
-"autocmd Filetype yaml,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
+autocmd Filetype yaml,c,cpp,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
@@ -186,6 +188,7 @@ autocmd FileType c command! -nargs=0 Rc :sp|:res -10|:term gcc %;./a.out
 autocmd FileType cpp command! -nargs=0 Rc :sp|:res -10|:term g++ %;./a.out
 autocmd FileType python command! -nargs=0 Rc :sp|:res -10|:term python3 % <cr>i
 autocmd FileType go command! -nargs=0 Rc :sp|:res -10|:term go run % <cr>i
+autocmd FileType ruby command! -nargs=0 Rc :sp|:res -10|:term ruby % <cr>i
 
 " golang
 let g:go_gopls_enabled=0
