@@ -49,7 +49,7 @@ require("bufferline").setup {
 	options = {
 		mode = 'tabs',
 		diagnostics = "nvim_lsp",
-		indicator_icon = '▎',
+		--indicator_icon = '▎',
 		buffer_close_icon = '',
 		modified_icon = '●',
 		close_icon = '',
@@ -116,3 +116,5 @@ vim.g.symbols_outline = {
 		TypeParameter = { icon = "𝙏", hl = "TSParameter" }
 	}
 }
+
+require("nvim-lsp-installer").setup {}

@@ -1,7 +1,7 @@
 local nvim_lsp = require('lspconfig')
 require("dsy.Completion")
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require "lsp_signature".setup()
@@ -232,7 +232,6 @@ require 'lspconfig'.rust_analyzer.setup {
 require('rust-tools').setup {
 	tools = { -- rust-tools options
 		autoSetHints = true,
-		hover_with_actions = true,
 		inlay_hints = {
 			show_parameter_hints = false,
 			parameter_hints_prefix = "",
