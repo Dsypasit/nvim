@@ -117,4 +117,4 @@ vim.g.symbols_outline = {
 	}
 }
 
-require("nvim-lsp-installer").setup {}
+--require("nvim-lsp-installer").setup {}
