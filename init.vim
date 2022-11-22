@@ -51,7 +51,7 @@ Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'vim-test/vim-test'
 "Plug 'ray-x/go.nvim'
 "Plug 'ray-x/guihua.lua'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " floatterm
 Plug 'voldikss/vim-floaterm'
@@ -192,6 +192,7 @@ autocmd FileType ruby command! -nargs=0 Rc :sp|:res -10|:term ruby % <cr>i
 
 " golang
 let g:go_gopls_enabled=0
+let g:go_def_mapping_enabled = 0
 "autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua OrgImports(1000)
 autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
@@ -347,8 +348,8 @@ nmap <Space>ef <plug>(easymotion-overwin-f)
 nnoremap <Space>w :w<CR>
 "exis
 nnoremap qq :qa 
-nnoremap <Space>q :bd<CR> 
-nnoremap <Space>x :q<CR> 
+nnoremap <Space>x :bd<CR> 
+nnoremap <Space>q :q<CR> 
 
 inoremap <C-c> <Esc>:noh<Cr>
 noremap <Space>y "+y
@@ -388,7 +389,7 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " airline
-let g:airline_theme='ayu_dark'
+let g:airline_theme='base16_gruvbox_dark_hard'
 let g:airline_extensions = ['branch', 'fugitiveline', 'fzf' ]
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_highlighting_cache = 1
