@@ -43,9 +43,9 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 	buf_set_keymap('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-	buf_set_keymap('n', '<space>df', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
+	buf_set_keymap('n', '<space>df', '<cmd>lua vim..diagnostic.goto_next()<CR>',
 		opts)
-	buf_set_keymap('n', '<space>dF', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
+	buf_set_keymap('n', '<space>ds', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
 		opts)
 	buf_set_keymap('n', '<space>dj', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false, border = "rounded"})<CR>', opts)
 	buf_set_keymap('n', '<space>dd', ':Telescope diagnostics<CR>', opts)
