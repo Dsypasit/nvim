@@ -51,23 +51,21 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', '<space>dd', ':Telescope diagnostics<CR>', opts)
 
 	-- Set some keybinds conditional on server capabilities
-	if client.resolved_capabilities.document_formatting then
-		buf_set_keymap("n", "<Leader>fF", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-	elseif client.resolved_capabilities.document_range_formatting then
-		buf_set_keymap("n", "<Leader>fF", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-	end
-
-	-- auto save
-	if client.resolved_capabilities.document_formatting then
+	if client.server_capabilities.document_formatting then
+		-- auto save
 		vim.api.nvim_command [[augroup Format]]
 		vim.api.nvim_command [[autocmd! * <buffer>]]
 		vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
 		vim.api.nvim_command [[augroup END]]
+		buf_set_keymap("n", "<Leader>fF", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	elseif client.server_capabilities.document_range_formatting then
+		buf_set_keymap("n", "<Leader>fF", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 	end
 
+
 	-- Set autocommands conditional on server_capabilities
-	if client.resolved_capabilities.document_highlight then
-		if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
+		if client.server_capabilities.document_highlight then
 			vim.cmd [[
       hi! LspReferenceRead cterm=bold ctermbg=239 guibg=#503935
       hi! LspReferenceText cterm=bold ctermbg=239 guibg=#503935
