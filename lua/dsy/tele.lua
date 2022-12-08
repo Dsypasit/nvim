@@ -13,7 +13,7 @@ require('telescope').setup {
 		},
 		file_browser = {
 			-- disables netrw and use telescope-file-browser in its place
-			hijack_netrw = true,
+			hijack_netrw = false,
 			mappings = {
 				["i"] = {
 					-- your custom insert mode mappings
@@ -32,7 +32,7 @@ require('telescope').setup {
 					end,
 					["<C-t>"] = require "telescope.actions".select_tab,
 					["<C-e>"] = fb_actions.create,
-					["<C-m>"] = fb_actions.goto_home_dir
+					["<C-m>"] = fb_actions.goto_home_dir,
 				},
 				["n"] = {
 					-- your custom normal mode mappings

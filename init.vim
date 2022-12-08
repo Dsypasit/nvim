@@ -175,7 +175,7 @@ au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
 autocmd BufNewFile,BufRead *.gohtml set filetype=html
-autocmd Filetype yaml,c,cpp,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2 expandtab
+"autocmd Filetype yaml,c,cpp,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
