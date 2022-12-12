@@ -345,7 +345,7 @@ map <Space>ef <plug>(easymotion-bd-f)
 nmap <Space>ef <plug>(easymotion-overwin-f)
 
 "autosave
-nnoremap <Space>w :w<CR>
+nnoremap <Space>w :wa<CR>
 "exis
 nnoremap qq :qa 
 nnoremap <Space>x :bd<CR> 
