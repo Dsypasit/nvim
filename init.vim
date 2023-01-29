@@ -29,11 +29,11 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'NTBBloodbath/rest.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
-Plug 'karb94/neoscroll.nvim' "smoot scolling
+"Plug 'karb94/neoscroll.nvim' "smoot scolling
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
 " nerdtree
-Plug 'preservim/nerdtree'
+"Plug 'preservim/nerdtree'
 
 " nvim-tree
 Plug 'kyazdani42/nvim-tree.lua'
@@ -43,9 +43,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " tele extension
-Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-telescope/telescope-project.nvim'
 
 " golang
 Plug 'vim-test/vim-test'
@@ -57,9 +55,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'voldikss/vim-floaterm'
 
 " startup
-Plug 'goolord/alpha-nvim'
+" Plug 'goolord/alpha-nvim'
 
-Plug 'morhetz/gruvbox'
+ Plug 'morhetz/gruvbox'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -82,6 +80,7 @@ Plug 'mattn/emmet-vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'kien/ctrlp.vim'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
@@ -115,9 +114,9 @@ nnoremap <space>fh <cmd>Telescope help_tags<cr>
 nnoremap <space>ft <cmd>Telescope tags<cr>
 nnoremap <space>fg <cmd>Telescope git_files<cr>
 nnoremap <space>fo <cmd>Telescope oldfiles<cr>
-nnoremap <space><space> <cmd>Telescope file_browser<cr>
+nnoremap <space><space> <cmd>Telescope buffers<cr>
 "nnoremap <space>ww <cmd>lua require'telescope'.extensions.project.project{ display_type = 'full' }<cr>
-nnoremap <space>fd <cmd>Telescope file_browser cwd=~/coding<cr>
+"nnoremap <space>fd <cmd>Telescope file_browser cwd=~/coding<cr>
 nnoremap <space>fn <cmd>Telescope find_files cwd=~/.config/nvim/<cr>
 nnoremap <space>fc <cmd>Telescope find_files cwd=~/dotfile<cr>
 nnoremap <space>fw <cmd>:Window<cr>
@@ -272,7 +271,7 @@ endfunction
 
 "set theme 
 set termguicolors
-colorscheme gruvbox 
+colorscheme gruvbox
 let g:gruvbox_transparent_bg=1
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_bold=0
@@ -366,7 +365,7 @@ noremap L $
 " nerdtree
 "autocmd BufEnter * lcd %:p:h
 set autochdir
-nmap <space>ee :NvimTreeFindFile!<CR>
+nmap <space>ee :NvimTreeOpen<CR>
 
 
 

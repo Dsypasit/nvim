@@ -1,4 +1,4 @@
-require 'alpha'.setup(require 'alpha.themes.startify'.opts)
+--require 'alpha'.setup(require 'alpha.themes.startify'.opts)
 require("rest-nvim").setup({
 	-- Open request results in a horizontal split
 	result_split_horizontal = false,
@@ -43,8 +43,6 @@ vim.cmd([[
         autocmd CmdlineLeave : lua require('scrollbar.handlers.search').handler.hide()
     augroup END
 ]])
-
-require('neoscroll').setup()
 
 require('dsy.lsp_config')
 require('dsy.cmp_config')
