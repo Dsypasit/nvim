@@ -1,10 +1,4 @@
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
-" Use release branch (recommend)
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Or build from source code by using yarn: https://yarnpkg.com
-"Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
@@ -29,11 +23,8 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'NTBBloodbath/rest.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
-"Plug 'karb94/neoscroll.nvim' "smoot scolling
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-
-" nerdtree
-"Plug 'preservim/nerdtree'
+Plug 'ahmedkhalf/project.nvim'
 
 " nvim-tree
 Plug 'kyazdani42/nvim-tree.lua'

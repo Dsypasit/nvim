@@ -130,3 +130,4 @@ vim.g.symbols_outline = {
 }
 
 require('nvim_comment').setup()
+require("project_nvim").setup()
