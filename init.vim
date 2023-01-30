@@ -106,11 +106,8 @@ nnoremap <space>ft <cmd>Telescope tags<cr>
 nnoremap <space>fg <cmd>Telescope git_files<cr>
 nnoremap <space>fo <cmd>Telescope oldfiles<cr>
 nnoremap <space><space> <cmd>Telescope buffers<cr>
-"nnoremap <space>ww <cmd>lua require'telescope'.extensions.project.project{ display_type = 'full' }<cr>
-"nnoremap <space>fd <cmd>Telescope file_browser cwd=~/coding<cr>
-nnoremap <space>fn <cmd>Telescope find_files cwd=~/.config/nvim/<cr>
-nnoremap <space>fc <cmd>Telescope find_files cwd=~/dotfile<cr>
-nnoremap <space>fw <cmd>:Window<cr>
+nnoremap <space>fp <cmd>lua require'telescope'.extensions.projects.projects{}<cr>
+nnoremap <space>fd <cmd>Telescope file_browser cwd=~/coding<cr>
 
 noremap <space>ss <cmd>Telescope live_grep<cr>
 nnoremap <space>sw <cmd>Telescope grep_string<cr>
