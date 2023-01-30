@@ -7,6 +7,7 @@ Plug 'nvim-lua/lsp-status.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'simrat39/symbols-outline.nvim'
+"
 " cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -24,6 +25,7 @@ Plug 'NTBBloodbath/rest.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+Plug 'Shatur/neovim-session-manager'
 Plug 'ahmedkhalf/project.nvim'
 
 " nvim-tree
