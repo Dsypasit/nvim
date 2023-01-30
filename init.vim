@@ -57,7 +57,7 @@ Plug 'voldikss/vim-floaterm'
 " startup
 " Plug 'goolord/alpha-nvim'
 
- Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
@@ -370,7 +370,7 @@ noremap L $
 " nerdtree
 "autocmd BufEnter * lcd %:p:h
 set autochdir
-nmap <space>ee :NvimTreeOpen<CR>
+nmap <space>ee :NvimTreeToggle<CR>
 
 
 
