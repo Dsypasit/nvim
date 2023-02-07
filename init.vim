@@ -73,6 +73,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'kshenoy/vim-signature'
+Plug 'toppair/reach.nvim'
 
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
@@ -114,10 +115,8 @@ nnoremap <space>sw <cmd>Telescope grep_string<cr>
 nnoremap <space>gr <cmd>Telescope lsp_references<cr>
 nnoremap <space>gd <cmd>Telescope lsp_document_symbols<cr>
 
-nmap <space>ma <cmd>lua require("harpoon.mark").add_file()<cr>
-nmap <space>mm <cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>
-nmap <space>mo <cmd>lua require("harpoon.ui").nav_prev()<cr>
-nmap <space>mi <cmd>lua require("harpoon.ui").nav_next()<cr>
+nmap <space>mm <cmd>ReachOpen marks<cr>
+nmap ' `
 
 " rest
 nnoremap <space>rh <Plug>RestNvim<cr>

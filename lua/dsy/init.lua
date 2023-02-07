@@ -163,3 +163,7 @@ vim.api.nvim_create_autocmd({ 'User' }, {
   end,
 })
 require('gitsigns').setup()
+-- default config
+require('reach').setup({
+  notifications = true
+})
