@@ -6,7 +6,6 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'nvim-lua/lsp-status.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'simrat39/symbols-outline.nvim'
 "
 " cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -27,6 +26,9 @@ Plug 'kevinhwang91/nvim-hlslens'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'Shatur/neovim-session-manager'
 Plug 'ahmedkhalf/project.nvim'
+Plug 'simrat39/symbols-outline.nvim'
+Plug 'ThePrimeagen/harpoon'
+Plug 'williamboman/mason.nvim'
 
 " nvim-tree
 Plug 'kyazdani42/nvim-tree.lua'
@@ -47,17 +49,17 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " floatterm
 Plug 'voldikss/vim-floaterm'
 
-" startup
-" Plug 'goolord/alpha-nvim'
-
+" theme
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'ayu-theme/ayu-vim'
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color'
 Plug 'pangloss/vim-javascript' , { 'for': ['javascript', 'javascript.jsx', 'html', 'vue'] }
 Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx'
-Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
@@ -100,8 +102,6 @@ lua require("dsy")
 nnoremap <space>tt <cmd>Telescope<cr>
 
 nnoremap <space>ff <cmd>Telescope find_files<cr>
-nnoremap <C-f> <cmd>Telescope find_files<cr>
-nnoremap <C-b> <cmd>Telescope buffers<cr>
 nnoremap <space>fb <cmd>Telescope buffers<cr>
 nnoremap <space>fh <cmd>Telescope help_tags<cr>
 nnoremap <space>ft <cmd>Telescope tags<cr>
@@ -116,6 +116,11 @@ nnoremap <space>sw <cmd>Telescope grep_string<cr>
 
 nnoremap <space>gr <cmd>Telescope lsp_references<cr>
 nnoremap <space>gd <cmd>Telescope lsp_document_symbols<cr>
+
+nmap <space>ma <cmd>lua require("harpoon.mark").add_file()<cr>
+nmap <space>mm <cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>
+nmap <space>mo <cmd>lua require("harpoon.ui").nav_prev()<cr>
+nmap <space>mi <cmd>lua require("harpoon.ui").nav_next()<cr>
 
 " rest
 nnoremap <space>rh <Plug>RestNvim<cr>
@@ -164,7 +169,7 @@ au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
 autocmd BufNewFile,BufRead *.gohtml set filetype=html
-"autocmd Filetype yaml,c,cpp,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2
+autocmd Filetype yaml,c,cpp,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
@@ -267,6 +272,7 @@ endif
 "set theme 
 set termguicolors
 colorscheme gruvbox
+" colorscheme ayu
 "let g:gruvbox_transparent_bg=1
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_bold=0

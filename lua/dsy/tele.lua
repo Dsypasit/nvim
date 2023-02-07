@@ -23,6 +23,8 @@ require('telescope').setup {
 		},
 	},
 	defaults = {
+		preview = false,
+		file_ignore_patterns = {"node_modules"},
 		mappings = {
 			i = {
 				["<C-j>"] = actions.move_selection_next,

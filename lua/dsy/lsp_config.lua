@@ -44,9 +44,9 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 	buf_set_keymap('n', '<space>df', '<cmd>lua vim.diagnostic.goto_next()<CR>',
-		opts)
+	opts)
 	buf_set_keymap('n', '<space>ds', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
-		opts)
+	opts)
 	buf_set_keymap('n', '<space>dj', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false, border = "rounded"})<CR>', opts)
 	buf_set_keymap('n', '<space>dd', ':Telescope diagnostics<CR>', opts)
 
@@ -67,10 +67,10 @@ local on_attach = function(client, bufnr)
 	if client.server_capabilities.document_highlight then
 		if client.server_capabilities.document_highlight then
 			vim.cmd [[
-      hi! LspReferenceRead cterm=bold ctermbg=239 guibg=#503935
-      hi! LspReferenceText cterm=bold ctermbg=239 guibg=#503935
-      hi! LspReferenceWrite cterm=bold ctermbg=239 guibg=#503935
-    ]]
+			hi! LspReferenceRead cterm=bold ctermbg=239 guibg=#503935
+			hi! LspReferenceText cterm=bold ctermbg=239 guibg=#503935
+			hi! LspReferenceWrite cterm=bold ctermbg=239 guibg=#503935
+			]]
 			vim.api.nvim_create_augroup('lsp_document_highlight', {})
 			vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
 				group = 'lsp_document_highlight',
@@ -230,27 +230,27 @@ require 'lspconfig'.rust_analyzer.setup {
 
 require('rust-tools').setup {
 	tools = { -- rust-tools options
-		autoSetHints = true,
-		inlay_hints = {
-			show_parameter_hints = false,
-			parameter_hints_prefix = "",
-			other_hints_prefix = "",
-		},
+	autoSetHints = true,
+	inlay_hints = {
+		show_parameter_hints = false,
+		parameter_hints_prefix = "",
+		other_hints_prefix = "",
 	},
-	server = {
-		-- on_attach is a callback called when the language server attachs to the buffer
-		on_attach = on_attach,
-		settings = {
-			-- to enable rust-analyzer settings visit:
-			-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-			["rust-analyzer"] = {
-				-- enable clippy on save
-				checkOnSave = {
-					command = "clippy"
-				},
-			}
+},
+server = {
+	-- on_attach is a callback called when the language server attachs to the buffer
+	on_attach = on_attach,
+	settings = {
+		-- to enable rust-analyzer settings visit:
+		-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+		["rust-analyzer"] = {
+			-- enable clippy on save
+			checkOnSave = {
+				command = "clippy"
+			},
 		}
-	},
+	}
+},
 }
 
 require 'lspconfig'.solargraph.setup {
@@ -280,4 +280,19 @@ require('lspconfig').yamlls.setup {
 			},
 		},
 	}
+}
+
+require('lspconfig').eslint.setup{}
+
+require('lspconfig').tsserver.setup{
+	handlers = handlers,
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
+	root_dir = function() return vim.loop.cwd() end,
+	init_options = {
+		preferences = {
+			disableSuggestions = true,
+		},
+	},
 }

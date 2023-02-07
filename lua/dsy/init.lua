@@ -1,3 +1,4 @@
+require('mason').setup()
 --require 'alpha'.setup(require 'alpha.themes.startify'.opts)
 require("rest-nvim").setup({
 	-- Open request results in a horizontal split
@@ -75,6 +76,9 @@ require("nvim-tree").setup({
         ignore_list = {},
       },
 })
+
+require("symbols-outline").setup()
+
 -- init.lua
 vim.g.symbols_outline = {
 	highlight_hovered_item = true,
