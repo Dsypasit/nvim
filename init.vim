@@ -55,11 +55,6 @@ Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'ayu-theme/ayu-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-Plug 'hail2u/vim-css3-syntax'
-Plug 'ap/vim-css-color'
-Plug 'pangloss/vim-javascript' , { 'for': ['javascript', 'javascript.jsx', 'html', 'vue'] }
-Plug 'jelera/vim-javascript-syntax'
-Plug 'mxw/vim-jsx'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'easymotion/vim-easymotion'
@@ -76,6 +71,8 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'kien/ctrlp.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'kshenoy/vim-signature'
 
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
@@ -278,9 +275,10 @@ let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_bold=0
 let g:gruvbox_italic=1
 set background=dark
+set signcolumn=yes
 highlight normal     ctermbg=none guibg=none
 highlight SignColumn guibg=none ctermbg=none
-set signcolumn=yes
+hi SignatureMarkText ctermbg=none guibg=none
 
 "autocmd VimEnter * hi Normal ctermbg=none guibg=none
 highlight LineNr     ctermfg=NONE guifg=NONE

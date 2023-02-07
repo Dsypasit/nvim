@@ -162,3 +162,4 @@ vim.api.nvim_create_autocmd({ 'User' }, {
     require('nvim-tree').toggle(false, true)
   end,
 })
+require('gitsigns').setup()
