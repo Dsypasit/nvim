@@ -74,7 +74,8 @@ Plug 'kien/ctrlp.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'kshenoy/vim-signature'
-Plug 'toppair/reach.nvim'
+" Plug 'toppair/reach.nvim'
+Plug 'lilydjwg/colorizer'
 
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
@@ -116,7 +117,11 @@ nnoremap <space>sw <cmd>Telescope grep_string<cr>
 nnoremap <space>gr <cmd>Telescope lsp_references<cr>
 nnoremap <space>gd <cmd>Telescope lsp_document_symbols<cr>
 
-nmap <space>mm <cmd>ReachOpen marks<cr>
+nmap <space>ma <cmd>:lua require("harpoon.mark").add_file()<cr>
+nmap <space>mm <cmd>:lua require("harpoon.ui").toggle_quick_menu()<cr>
+nmap <space>mj <cmd>:lua require("harpoon.ui").nav_file(1)<cr>
+nmap <space>mk <cmd>:lua require("harpoon.ui").nav_file(2)<cr>
+nmap <space>ml <cmd>:lua require("harpoon.ui").nav_file(3)<cr>
 nmap ' `
 
 " rest
@@ -153,7 +158,7 @@ map <Esc> <ESC>:noh<Cr>
 "set foldexpr=nvim_treesitter#foldexpr()
 
 " markdown
-let g:mkdp_browser = '/snap/bin/firefox'
+" let g:mkdp_browser = '/snap/bin/firefox'
 
 let g:ruby_host_prog = '/usr/bin/ruby'
 
@@ -166,7 +171,13 @@ au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
 autocmd BufNewFile,BufRead *.gohtml set filetype=html
-autocmd Filetype yaml,c,cpp,markdown,html,css,javascript,javascriptreact,arduino set ts=2 sw=2
+autocmd Filetype c,cpp,markdown,html,css,javascript,javascriptreact,arduino,js set ts=2 sw=2
+" Fix auto-indentation for YAML files
+augroup yaml_fix
+    autocmd!
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
+augroup END
+
 autocmd FileType html,css,javascript,javascriptreact EmmetInstall
 let g:jsx_ext_required = 1
 " We bind it to <leader>e here, feel free to change this
@@ -191,6 +202,7 @@ autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 tnoremap <C-n> <C-\><C-n>
 syntax  on
+set undofile
 set mouse=a
 set updatetime=500
 "set cursorline
@@ -353,8 +365,8 @@ inoremap <C-c> <Esc>:noh<Cr>
 noremap <Space>y "+y
 
 " buffer
-nnoremap <C-s><C-j> :bp<cr>
-nnoremap <C-s><C-k> :bn<cr>
+nnoremap <C-s><C-j> :bn<cr>
+nnoremap <C-s><C-k> :bp<cr>
 nnoremap <C-s><C-l> :ls<cr>:b
 nnoremap <C-s><C-d> :w <bar> %bd <bar> e# <bar> bd# <CR>
 

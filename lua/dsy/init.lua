@@ -134,7 +134,9 @@ vim.g.symbols_outline = {
 }
 
 require('nvim_comment').setup()
-require("project_nvim").setup()
+require("project_nvim").setup({
+	exclude_dirs = {"src"},
+})
 
 local Path = require('plenary.path')
 require('session_manager').setup({
@@ -164,6 +166,7 @@ vim.api.nvim_create_autocmd({ 'User' }, {
 })
 require('gitsigns').setup()
 -- default config
-require('reach').setup({
-  notifications = true
-})
+-- require('reach').setup({
+--   notifications = true
+-- })
+require("harpoon").setup()
