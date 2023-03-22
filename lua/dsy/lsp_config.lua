@@ -294,3 +294,11 @@ require('lspconfig').tsserver.setup{
 		},
 	},
 }
+
+nvim_lsp.tailwindcss.setup {}
+require 'lspconfig'.prismals.setup {
+	handlers = handlers,
+	capabilities = capabilities,
+	on_attach = on_attach,
+}
+

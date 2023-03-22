@@ -2,7 +2,6 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
 Plug 'nvim-lua/lsp-status.nvim'
 Plug 'onsails/lspkind.nvim'
 Plug 'ray-x/lsp_signature.nvim'
@@ -171,7 +170,7 @@ au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
 autocmd BufNewFile,BufRead *.gohtml set filetype=html
-autocmd Filetype c,cpp,markdown,html,css,javascript,javascriptreact,arduino,js set ts=2 sw=2
+autocmd Filetype prisma,typescript,c,cpp,markdown,html,css,javascript,javascriptreact,arduino,js set ts=2 sw=2
 " Fix auto-indentation for YAML files
 augroup yaml_fix
     autocmd!
@@ -218,6 +217,8 @@ set visualbell
 set shiftwidth=4
 set hidden
 set tabstop=4
+set expandtab
+set smarttab
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines

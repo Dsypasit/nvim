@@ -23,13 +23,16 @@ require('telescope').setup {
 		},
 	},
 	defaults = {
-		preview = false,
+        preview = {
+            hide_on_startup = true, -- hide previewer when picker starts
+        },
 		file_ignore_patterns = {"node_modules"},
 		mappings = {
 			i = {
 				["<C-j>"] = actions.move_selection_next,
 				["<C-k>"] = actions.move_selection_previous,
 				["<C-c>"] = actions.close,
+                ['<C-p>'] = require('telescope.actions.layout').toggle_preview,
 			},
 			n = {
 				["<C-c>"] = actions.close,
