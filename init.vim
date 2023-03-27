@@ -29,6 +29,8 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'williamboman/mason.nvim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'folke/which-key.nvim'
+Plug 'stevearc/dressing.nvim'
 
 " nvim-tree
 Plug 'kyazdani42/nvim-tree.lua'
@@ -55,10 +57,7 @@ Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'ayu-theme/ayu-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'easymotion/vim-easymotion'
-Plug 'ggandor/lightspeed.nvim'
+Plug 'ggandor/leap.nvim'
 Plug 'tpope/vim-surround'
 Plug 'kana/vim-arpeggio'
 Plug 'jiangmiao/auto-pairs'
@@ -68,9 +67,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'terrortylor/nvim-comment'
 Plug 'chrisbra/unicode.vim'
 Plug 'mattn/emmet-vim'
-Plug 'dart-lang/dart-vim-plugin'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'kien/ctrlp.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'kshenoy/vim-signature'

@@ -179,7 +179,10 @@ require('lualine').setup {
     section_separators = { left = '', right = ' ' },
   },
   sections = {
-       lualine_c = {'%=', '%F%m',} 
+       lualine_c = {'%=', '%F%m',},
   },
   extensions = {'fugitive', 'nvim-tree', 'fzf'}
 }
+
+require('leap').add_default_mappings()
+require('dressing').setup()
