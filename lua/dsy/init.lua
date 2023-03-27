@@ -157,16 +157,29 @@ require('session_manager').setup({
 
 local config_group = vim.api.nvim_create_augroup('MyConfigGroup', {}) -- A global group for all your config autocommands
 
-vim.api.nvim_create_autocmd({ 'User' }, {
-  pattern = "SessionLoadPost",
-  group = config_group,
-  callback = function()
-    require('nvim-tree').toggle(false, true)
-  end,
-})
+-- vim.api.nvim_create_autocmd({ 'User' }, {
+--   pattern = "SessionLoadPost",
+--   group = config_group,
+--   callback = function()
+--     require('nvim-tree').toggle(false, true)
+--   end,
+-- })
+--
 require('gitsigns').setup()
 -- default config
 -- require('reach').setup({
 --   notifications = true
 -- })
 require("harpoon").setup()
+
+require('lualine').setup {
+  options = {
+    theme = 'auto',
+    component_separators = '',
+    section_separators = { left = '', right = ' ' },
+  },
+  sections = {
+       lualine_c = {'%=', '%F%m',} 
+  },
+  extensions = {'fugitive', 'nvim-tree', 'fzf'}
+}

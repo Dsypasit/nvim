@@ -28,6 +28,8 @@ Plug 'ahmedkhalf/project.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'williamboman/mason.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'feline-nvim/feline.nvim'
 
 " nvim-tree
 Plug 'kyazdani42/nvim-tree.lua'
@@ -54,8 +56,8 @@ Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'ayu-theme/ayu-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 " Plug 'easymotion/vim-easymotion'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'tpope/vim-surround'
@@ -92,6 +94,7 @@ Plug 'simrat39/rust-tools.nvim'
 
 call plug#end()
 
+set termguicolors
 " lua
 lua require("dsy")
 "autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()
@@ -230,6 +233,7 @@ set wildmenu
 set autoread
 set autowrite
 set formatoptions-=cro
+set colorcolumn=80
 filetype on
 filetype plugin indent on
 
@@ -399,11 +403,11 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 " airline
-let g:airline_theme='base16_gruvbox_dark_hard'
-let g:airline_extensions = ['branch', 'fugitiveline', 'fzf' ]
-let g:airline#extensions#tabline#enabled = 0
-let g:airline_highlighting_cache = 1
-let g:airline_powerline_fonts = 1
+" let g:airline_theme='base16_gruvbox_dark_hard'
+" let g:airline_extensions = ['branch', 'fugitiveline', 'fzf' ]
+" let g:airline#extensions#tabline#enabled = 0
+" let g:airline_highlighting_cache = 1
+" let g:airline_powerline_fonts = 1
 "let g:airline_section_c = '%t'
 "source ~/.config/nvim/statusline.vim
 
