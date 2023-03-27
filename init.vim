@@ -29,7 +29,6 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'williamboman/mason.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'feline-nvim/feline.nvim'
 
 " nvim-tree
 Plug 'kyazdani42/nvim-tree.lua'
