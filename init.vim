@@ -24,13 +24,14 @@ Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'Shatur/neovim-session-manager'
-Plug 'ahmedkhalf/project.nvim'
+" Plug 'ahmedkhalf/project.nvim'
 Plug 'simrat39/symbols-outline.nvim'
-Plug 'ThePrimeagen/harpoon'
+" Plug 'ThePrimeagen/harpoon'
 Plug 'williamboman/mason.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
+Plug 'windwp/nvim-spectre'
 
 " nvim-tree
 Plug 'kyazdani42/nvim-tree.lua'
@@ -73,6 +74,7 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'kshenoy/vim-signature'
 " Plug 'toppair/reach.nvim'
 Plug 'lilydjwg/colorizer'
+Plug 'arturgoms/moonbow.nvim'
 
 " telescope
 Plug 'nvim-telescope/telescope.nvim'

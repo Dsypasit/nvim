@@ -134,11 +134,12 @@ vim.g.symbols_outline = {
 }
 
 require('nvim_comment').setup()
-require("project_nvim").setup({
-	exclude_dirs = {"src"},
-})
+-- require("project_nvim").setup({
+-- 	exclude_dirs = {"src"},
+-- })
 
 local Path = require('plenary.path')
+
 require('session_manager').setup({
   sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'), -- The directory where the session files will be saved.
   path_replacer = '__', -- The character to which the path separator will be replaced for session files.
@@ -170,7 +171,6 @@ require('gitsigns').setup()
 -- require('reach').setup({
 --   notifications = true
 -- })
-require("harpoon").setup()
 
 require('lualine').setup {
   options = {
@@ -186,3 +186,26 @@ require('lualine').setup {
 
 require('leap').add_default_mappings()
 require('dressing').setup()
+require("which-key").setup {
+    window = {
+        border = "single", -- none, single, double, shadow
+        position = "bottom", -- bottom, top
+        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+        padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
+        -- winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+    },
+}
+require('spectre').setup()
+
+vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").open()<CR>', {
+    desc = "Open Spectre"
+})
+vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+    desc = "Search on current file"
+})
