@@ -63,18 +63,20 @@ require("bufferline").setup {
 		numbers = function(opts)
 			return string.format('%s|%s.)', opts.ordinal, opts.raise(opts.id))
 		end,
-		separator_style = "slant"
+		-- separator_style = "slant"
 	}
 }
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup({
 	  sync_root_with_cwd = true,
 	  respect_buf_cwd = true,
-      update_focused_file = {
-        enable = true,
-        update_root = true,
-        ignore_list = {},
-      },
+	        update_focused_file = {
+	          enable = true,
+	          update_root = true,
+	          ignore_list = {},
+    },
 })
 
 require("symbols-outline").setup()
@@ -181,7 +183,7 @@ require('lualine').setup {
   sections = {
        lualine_c = {'%=', '%F%m',},
   },
-  extensions = {'fugitive', 'nvim-tree', 'fzf'}
+  extensions = {'fugitive', 'nvim-tree', 'fzf', 'quickfix'}
 }
 
 require('leap').add_default_mappings()
@@ -209,3 +211,12 @@ vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual(
 vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
     desc = "Search on current file"
 })
+--
+-- require('tabnine').setup({
+--   disable_auto_comment=true,
+--   accept_keymap="<Tab>",
+--   dismiss_keymap = "<C-]>",
+--   debounce_ms = 800,
+--   suggestion_color = {gui = "#808080", cterm = 244},
+--   exclude_filetypes = {"TelescopePrompt"}
+-- })

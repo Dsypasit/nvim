@@ -1,5 +1,8 @@
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
+" generative ai
+" Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+
 " lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp-status.nvim'
@@ -32,9 +35,10 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'windwp/nvim-spectre'
+Plug 'cljoly/telescope-repo.nvim'
 
 " nvim-tree
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-tree/nvim-tree.lua'
 
 " icon
 Plug 'ryanoasis/vim-devicons'
@@ -75,6 +79,8 @@ Plug 'kshenoy/vim-signature'
 " Plug 'toppair/reach.nvim'
 Plug 'lilydjwg/colorizer'
 Plug 'arturgoms/moonbow.nvim'
+Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
+Plug 'sainnhe/gruvbox-material'
 
 " telescope
 Plug 'nvim-telescope/telescope.nvim'
@@ -89,6 +95,7 @@ Plug 'windwp/nvim-ts-autotag'
 
 " rust
 Plug 'simrat39/rust-tools.nvim'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -108,7 +115,7 @@ nnoremap <space>ft <cmd>Telescope tags<cr>
 nnoremap <space>fg <cmd>Telescope git_files<cr>
 nnoremap <space>fo <cmd>Telescope oldfiles<cr>
 nnoremap <space><space> <cmd>Telescope buffers<cr>
-nnoremap <space>fp <cmd>lua require'telescope'.extensions.projects.projects{}<cr>
+" nnoremap <space>fp <cmd>lua require'telescope'.extensions.projects.projects{}<cr>
 nnoremap <space>fd <cmd>Telescope file_browser cwd=~/coding<cr>
 
 noremap <space>ss <cmd>Telescope live_grep<cr>
@@ -116,6 +123,8 @@ nnoremap <space>sw <cmd>Telescope grep_string<cr>
 
 nnoremap <space>gr <cmd>Telescope lsp_references<cr>
 nnoremap <space>gd <cmd>Telescope lsp_document_symbols<cr>
+
+nnoremap <C-p> <cmd>Telescope repo list<cr>
 
 nmap <space>ma <cmd>:lua require("harpoon.mark").add_file()<cr>
 nmap <space>mm <cmd>:lua require("harpoon.ui").toggle_quick_menu()<cr>
@@ -152,10 +161,6 @@ map <Esc> <ESC>:noh<Cr>
 
 "nnoremap <leader>fj <cmd>Telescope file_browser path=~<cr>
 "nnoremap <leader>fk <cmd>Telescope find_files path=~<cr>
-
-" treesitter
-"set foldmethod=expr
-"set foldexpr=nvim_treesitter#foldexpr()
 
 " markdown
 " let g:mkdp_browser = '/snap/bin/firefox'
@@ -199,6 +204,9 @@ let g:go_def_mapping_enabled = 0
 autocmd BufWritePre *.go lua OrgImports(1000)
 autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 "au filetype go inoremap <buffer> . .<C-x><C-o>
+"
+" rust
+let g:rustfmt_autosave = 1
 
 tnoremap <C-n> <C-\><C-n>
 syntax  on
@@ -231,17 +239,17 @@ set wildmenu
 set autoread
 set autowrite
 set formatoptions-=cro
-set colorcolumn=80
+" set colorcolumn=80
 filetype on
 filetype plugin indent on
 
 set path=$HOME/dotfile,$HOME/codes/*,$HOME/.config/nvim,$HOME,$HOME/codes/university_code/**,$HOME/.config/starship.toml,$HOME/.config/picom,$HOME/.config/dunst,$HOME/.config/polybar,$HOME/.i3,$HOME/.config/,
 set path+=**
 
-let g:netrw_browse_split=4
-let g:netrw_altv=1
-let g:netrw_liststyle=3
-let g:netrw_list_hide=netrw_gitignore#Hide()
+" let g:netrw_browse_split=4
+" let g:netrw_altv=1
+" let g:netrw_liststyle=3
+" let g:netrw_list_hide=netrw_gitignore#Hide()
 "check |netrw-browse-map| for more mapping 
 
 command MakeTags !ctags -R .
@@ -283,20 +291,35 @@ endif
 
 "set theme 
 set termguicolors
-colorscheme gruvbox
+colorscheme gruvbox-material
 " colorscheme ayu
 "let g:gruvbox_transparent_bg=1
+
+" gruvbox-mat
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_foreground = 'original'
+let g:gruvbox_material_statusline_style = 'original'
+let g:gruvbox_material_transparent_background = 2
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_ui_contrast = 'high'
+
+" gruvbox-ori
 let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_bold=0
+let g:gruvbox_bold=1
 let g:gruvbox_italic=1
 set background=dark
 set signcolumn=yes
 highlight normal     ctermbg=none guibg=none
 highlight SignColumn guibg=none ctermbg=none
+highlight LineNr     ctermfg=NONE guifg=NONE
 hi SignatureMarkText ctermbg=none guibg=none
 
+augroup transparent_signs
+  au!
+  autocmd ColorScheme * highlight SignColumn guibg=NONE
+augroup END
+
 "autocmd VimEnter * hi Normal ctermbg=none guibg=none
-highlight LineNr     ctermfg=NONE guifg=NONE
 
 "hide toolbars
 if has("gui_running")
@@ -432,3 +455,36 @@ nnoremap <Leader>g :silent lgrep<Space>
 nnoremap <silent> [f :lprevious<CR>
 nnoremap <silent> ]f :lnext<CR>
 set grepformat+=%f:%l:%c:%m
+
+function DisableSyntaxTreesitter()
+    if exists(':TSBufDisable')
+        exec 'TSBufDisable autotag'
+        exec 'TSBufDisable highlight'
+        exec 'TSBufDisable incremental_selection'
+        exec 'TSBufDisable indent'
+        exec 'TSBufDisable playground'
+        exec 'TSBufDisable query_linter'
+        exec 'TSBufDisable rainbow'
+        exec 'TSBufDisable refactor.highlight_definitions'
+        exec 'TSBufDisable refactor.navigation'
+        exec 'TSBufDisable refactor.smart_rename'
+        exec 'TSBufDisable refactor.highlight_current_scope'
+        exec 'TSBufDisable textobjects.swap'
+        " exec 'TSBufDisable textobjects.move'
+        exec 'TSBufDisable textobjects.lsp_interop'
+        exec 'TSBufDisable textobjects.select'
+        exec ''
+    endif
+
+    set foldmethod=manual
+    syntax off
+    filetype off
+    set noundofile
+    set noswapfile
+    set noloadplugins
+endfunction
+
+augroup BigFileDisable
+    autocmd!
+    autocmd BufReadPre,FileReadPre * if getfsize(expand("%")) > 512 * 1024 | exec DisableSyntaxTreesitter() | endif
+augroup END
