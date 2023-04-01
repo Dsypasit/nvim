@@ -176,7 +176,7 @@ require('gitsigns').setup()
 
 require('lualine').setup {
   options = {
-    theme = 'auto',
+    theme = 'gruvbox-material',
     component_separators = '',
     section_separators = { left = '', right = ' ' },
   },

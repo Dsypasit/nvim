@@ -288,6 +288,18 @@ if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
+"
+
+set background=dark
+" gruvbox-mat
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_foreground = 'original'
+let g:gruvbox_material_statusline_style = 'original'
+let g:gruvbox_material_transparent_background = 2
+" let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_visual = 'reverse'
+let g:gruvbox_material_diagnostic_virtual_text = 'colored'
+let g:gruvbox_material_ui_contrast = 'high'
 
 "set theme 
 set termguicolors
@@ -295,19 +307,11 @@ colorscheme gruvbox-material
 " colorscheme ayu
 "let g:gruvbox_transparent_bg=1
 
-" gruvbox-mat
-let g:gruvbox_material_background = 'medium'
-let g:gruvbox_material_foreground = 'original'
-let g:gruvbox_material_statusline_style = 'original'
-let g:gruvbox_material_transparent_background = 2
-let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_ui_contrast = 'high'
 
 " gruvbox-ori
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_bold=1
 let g:gruvbox_italic=1
-set background=dark
 set signcolumn=yes
 highlight normal     ctermbg=none guibg=none
 highlight SignColumn guibg=none ctermbg=none

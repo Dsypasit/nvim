@@ -227,10 +227,11 @@ require 'lspconfig'.rust_analyzer.setup {
 	on_attach = on_attach,
 }
 
-
+local rt = require("rust-tools")
 require('rust-tools').setup {
 	tools = { -- rust-tools options
 	autoSetHints = true,
+    -- hover_with_actions = true,
 	inlay_hints = {
 		show_parameter_hints = false,
 		parameter_hints_prefix = "",
@@ -239,66 +240,70 @@ require('rust-tools').setup {
 },
 server = {
 	-- on_attach is a callback called when the language server attachs to the buffer
-	on_attach = on_attach,
-	settings = {
-		-- to enable rust-analyzer settings visit:
-		-- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-		["rust-analyzer"] = {
-			-- enable clippy on save
-			checkOnSave = {
-				command = "clippy"
-			},
-		}
-	}
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+    end,
+    settings = {
+        -- to enable rust-analyzer settings visit:
+        -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+        ["rust-analyzer"] = {
+            -- enable clippy on save
+            checkOnSave = {
+                command = "clippy"
+            },
+        }
+    }
 },
 }
 
 require 'lspconfig'.solargraph.setup {
-	handlers = handlers,
-	capabilities = capabilities,
-	on_attach = on_attach,
-	settings = {
-		solargraph = {
-			diagnostics = false
-		}
-	}
+    handlers = handlers,
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        solargraph = {
+            diagnostics = false
+        }
+    }
 }
 
 require('lspconfig').yamlls.setup {
-	handlers = handlers,
-	capabilities = capabilities,
-	on_attach = on_attach,
-	-- other configuration for setup {}
-	settings = {
-		yaml = {
-			-- other settings. note this overrides the lspconfig defaults.
-			schemas = {
-				-- ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-				Kubernetes = "/*.yaml"
-			},
-		},
-	}
+    handlers = handlers,
+    capabilities = capabilities,
+    on_attach = on_attach,
+    -- other configuration for setup {}
+    settings = {
+        yaml = {
+            -- other settings. note this overrides the lspconfig defaults.
+            schemas = {
+                -- ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                Kubernetes = "/*.yaml"
+            },
+        },
+    }
 }
 
 require('lspconfig').eslint.setup{}
 
 require('lspconfig').tsserver.setup{
-	handlers = handlers,
-	capabilities = capabilities,
-	on_attach = on_attach,
-	filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
-	root_dir = function() return vim.loop.cwd() end,
-	init_options = {
-		preferences = {
-			disableSuggestions = true,
-		},
-	},
+    handlers = handlers,
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
+    root_dir = function() return vim.loop.cwd() end,
+    init_options = {
+        preferences = {
+            disableSuggestions = true,
+        },
+    },
 }
 
 nvim_lsp.tailwindcss.setup {}
 require 'lspconfig'.prismals.setup {
-	handlers = handlers,
-	capabilities = capabilities,
-	on_attach = on_attach,
+    handlers = handlers,
+    capabilities = capabilities,
+    on_attach = on_attach,
 }
 
