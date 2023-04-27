@@ -29,7 +29,7 @@ Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'Shatur/neovim-session-manager'
 " Plug 'ahmedkhalf/project.nvim'
 Plug 'simrat39/symbols-outline.nvim'
-" Plug 'ThePrimeagen/harpoon'
+Plug 'ThePrimeagen/harpoon'
 Plug 'williamboman/mason.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'folke/which-key.nvim'
@@ -128,9 +128,11 @@ nnoremap <C-p> <cmd>Telescope repo list<cr>
 
 nmap <space>ma <cmd>:lua require("harpoon.mark").add_file()<cr>
 nmap <space>mm <cmd>:lua require("harpoon.ui").toggle_quick_menu()<cr>
-nmap <space>mj <cmd>:lua require("harpoon.ui").nav_file(1)<cr>
-nmap <space>mk <cmd>:lua require("harpoon.ui").nav_file(2)<cr>
-nmap <space>ml <cmd>:lua require("harpoon.ui").nav_file(3)<cr>
+nmap <C-s><C-j> <cmd>:lua require("harpoon.ui").nav_prev()<cr>
+nmap <C-s><C-k> <cmd>:lua require("harpoon.ui").nav_next()<cr>
+nmap <space>m1 <cmd>:lua require("harpoon.ui").nav_file(1)<cr>
+nmap <space>m2 <cmd>:lua require("harpoon.ui").nav_file(2)<cr>
+nmap <space>m3 <cmd>:lua require("harpoon.ui").nav_file(3)<cr>
 nmap ' `
 
 " rest
@@ -395,9 +397,9 @@ inoremap <C-c> <Esc>:noh<Cr>
 noremap <Space>y "+y
 
 " buffer
-nnoremap <C-s><C-j> :bn<cr>
-nnoremap <C-s><C-k> :bp<cr>
-nnoremap <C-s><C-l> :ls<cr>:b
+" nnoremap <C-s><C-j> :bn<cr>
+" nnoremap <C-s><C-k> :bp<cr>
+" nnoremap <C-s><C-l> :ls<cr>:b
 nnoremap <C-s><C-d> :w <bar> %bd <bar> e# <bar> bd# <CR>
 
 noremap H ^

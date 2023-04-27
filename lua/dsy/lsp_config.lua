@@ -240,11 +240,12 @@ require('rust-tools').setup {
 },
 server = {
 	-- on_attach is a callback called when the language server attachs to the buffer
-    on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
-    end,
+    on_attach = on_attach,
+    -- on_attach = function(client, bufnr)
+    --     on_attach(client, bufnr)
+    --   -- Hover actions
+    --   -- vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+    -- end,
     settings = {
         -- to enable rust-analyzer settings visit:
         -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
