@@ -86,6 +86,7 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'airblade/vim-rooter'
 
 " nvim-treesitter
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -108,6 +109,8 @@ lua require("dsy")
 "ind files using Telescope command-line sugar.
 nnoremap <space>tt <cmd>Telescope<cr>
 
+let g:rooter_patterns = ['.git', '.svn', 'package.json', '!node_modules']
+nnoremap <space>fp :Telescope find_files cwd='.FindRootDirectory().'/<cr>
 nnoremap <space>ff <cmd>Telescope find_files<cr>
 nnoremap <space>fb <cmd>Telescope buffers<cr>
 nnoremap <space>fh <cmd>Telescope help_tags<cr>
@@ -461,36 +464,36 @@ nnoremap <Leader>g :silent lgrep<Space>
 nnoremap <silent> [f :lprevious<CR>
 nnoremap <silent> ]f :lnext<CR>
 set grepformat+=%f:%l:%c:%m
-
-function DisableSyntaxTreesitter()
-    if exists(':TSBufDisable')
-        exec 'TSBufDisable autotag'
-        exec 'TSBufDisable highlight'
-        exec 'TSBufDisable incremental_selection'
-        exec 'TSBufDisable indent'
-        exec 'TSBufDisable playground'
-        exec 'TSBufDisable query_linter'
-        exec 'TSBufDisable rainbow'
-        exec 'TSBufDisable refactor.highlight_definitions'
-        exec 'TSBufDisable refactor.navigation'
-        exec 'TSBufDisable refactor.smart_rename'
-        exec 'TSBufDisable refactor.highlight_current_scope'
-        exec 'TSBufDisable textobjects.swap'
-        " exec 'TSBufDisable textobjects.move'
-        exec 'TSBufDisable textobjects.lsp_interop'
-        exec 'TSBufDisable textobjects.select'
-        exec ''
-    endif
-
-    set foldmethod=manual
-    syntax off
-    filetype off
-    set noundofile
-    set noswapfile
-    set noloadplugins
-endfunction
-
-augroup BigFileDisable
-    autocmd!
-    autocmd BufReadPre,FileReadPre * if getfsize(expand("%")) > 512 * 1024 | exec DisableSyntaxTreesitter() | endif
-augroup END
+"
+" function DisableSyntaxTreesitter()
+"     if exists(':TSBufDisable')
+"         exec 'TSBufDisable autotag'
+"         exec 'TSBufDisable highlight'
+"         exec 'TSBufDisable incremental_selection'
+"         exec 'TSBufDisable indent'
+"         exec 'TSBufDisable playground'
+"         exec 'TSBufDisable query_linter'
+"         exec 'TSBufDisable rainbow'
+"         exec 'TSBufDisable refactor.highlight_definitions'
+"         exec 'TSBufDisable refactor.navigation'
+"         exec 'TSBufDisable refactor.smart_rename'
+"         exec 'TSBufDisable refactor.highlight_current_scope'
+"         exec 'TSBufDisable textobjects.swap'
+"         " exec 'TSBufDisable textobjects.move'
+"         exec 'TSBufDisable textobjects.lsp_interop'
+"         exec 'TSBufDisable textobjects.select'
+"         exec ''
+"     endif
+"
+"     set foldmethod=manual
+"     syntax off
+"     filetype off
+"     set noundofile
+"     set noswapfile
+"     set noloadplugins
+" endfunction
+"
+" augroup BigFileDisable
+"     autocmd!
+"     autocmd BufReadPre,FileReadPre * if getfsize(expand("%")) > 512 * 1024 | exec DisableSyntaxTreesitter() | endif
+" augroup END
