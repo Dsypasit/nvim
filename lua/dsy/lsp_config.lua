@@ -190,7 +190,14 @@ require 'lspconfig'.clangd.setup {
 --on_attach = on_attach,
 --}
 
-require 'lspconfig'.jedi_language_server.setup {
+-- require 'lspconfig'.jedi_language_server.setup {
+-- 	handlers = handlers,
+-- 	-- for postfix snippets and analyzers
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- }
+
+require 'lspconfig'.pyright.setup {
 	handlers = handlers,
 	-- for postfix snippets and analyzers
 	capabilities = capabilities,

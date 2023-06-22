@@ -62,7 +62,8 @@ Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'ayu-theme/ayu-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-Plug 'ggandor/leap.nvim'
+" Plug 'ggandor/leap.nvim'
+Plug 'phaazon/hop.nvim'
 Plug 'tpope/vim-surround'
 Plug 'kana/vim-arpeggio'
 Plug 'jiangmiao/auto-pairs'
@@ -110,7 +111,6 @@ lua require("dsy")
 nnoremap <space>tt <cmd>Telescope<cr>
 
 let g:rooter_patterns = ['.git', '.svn', 'package.json', '!node_modules']
-nnoremap <space>fp :Telescope find_files cwd='.FindRootDirectory().'/<cr>
 nnoremap <space>ff <cmd>Telescope find_files<cr>
 nnoremap <space>fb <cmd>Telescope buffers<cr>
 nnoremap <space>fh <cmd>Telescope help_tags<cr>
@@ -181,7 +181,7 @@ au FocusGained,BufEnter * :checktime
 autocmd BufRead, BufWritePost *.java normal gg=G
 autocmd FileType json autocmd BufRead, BufWritePost, BufWritePre normal :Jsonformat
 autocmd BufNewFile,BufRead *.gohtml set filetype=html
-autocmd Filetype prisma,typescript,c,cpp,markdown,html,css,javascript,javascriptreact,arduino,js set ts=2 sw=2
+autocmd Filetype prisma,typescript, typescriptreact,c,cpp,markdown,html,css,javascript,javascriptreact,arduino,js set ts=2 sw=2
 " Fix auto-indentation for YAML files
 augroup yaml_fix
     autocmd!

@@ -186,7 +186,7 @@ require('lualine').setup {
   extensions = {'fugitive', 'nvim-tree', 'fzf', 'quickfix'}
 }
 
-require('leap').add_default_mappings()
+-- require('leap').add_default_mappings()
 require('dressing').setup()
 require("which-key").setup {
     window = {
@@ -211,12 +211,46 @@ vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual(
 vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
     desc = "Search on current file"
 })
---
--- require('tabnine').setup({
---   disable_auto_comment=true,
---   accept_keymap="<Tab>",
---   dismiss_keymap = "<C-]>",
---   debounce_ms = 800,
---   suggestion_color = {gui = "#808080", cterm = 244},
---   exclude_filetypes = {"TelescopePrompt"}
--- })
+
+require'hop'.setup { 
+    keys = 'asdfghjkl;nmvcuiorew',
+    current_line_only = false,
+    jump_on_sole_occurrence = true,
+}
+-- place this in one of your configuration file(s)
+
+-- normal mode (easymotion-like)
+vim.api.nvim_set_keymap("n", "<space>fk", "<cmd>HopWordBC<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<space>fj", "<cmd>HopWordAC<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>j", "<cmd>HopLineAC<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "<Leader>k", "<cmd>HopLineBC<CR>", {noremap=true})
+
+-- visual mode (easymotion-like)
+vim.api.nvim_set_keymap("v", "<space>fk", "<cmd>HopWordBC<CR>", {noremap=true})
+vim.api.nvim_set_keymap("v", "<space>fk", "<cmd>HopWordAC<CR>", {noremap=true})
+vim.api.nvim_set_keymap("v", "<Leader>j", "<cmd>HopLineAC<CR>", {noremap=true})
+vim.api.nvim_set_keymap("v", "<Leader>k", "<cmd>HopLineBC<CR>", {noremap=true})
+
+-- normal mode (sneak-like)
+vim.api.nvim_set_keymap("n", "s", "<cmd>HopChar2AC<CR>", {noremap=false})
+vim.api.nvim_set_keymap("n", "S", "<cmd>HopChar2BC<CR>", {noremap=false})
+
+-- visual mode (sneak-like)
+vim.api.nvim_set_keymap("v", "s", "<cmd>HopChar2AC<CR>", {noremap=false})
+vim.api.nvim_set_keymap("v", "S", "<cmd>HopChar2BC<CR>", {noremap=false})
+
+-- place this in one of your configuration file(s)
+local hop = require('hop')
+local directions = require('hop.hint').HintDirection
+vim.keymap.set('', 'f', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+end, {remap=true})
+vim.keymap.set('', 'F', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+end, {remap=true})
+vim.keymap.set('', 't', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
+end, {remap=true})
+vim.keymap.set('', 'T', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
+end, {remap=true})
