@@ -213,7 +213,7 @@ vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search(
 })
 
 require'hop'.setup { 
-    keys = 'asdfghjkl;nmvcuiorew',
+    keys = 'l;uiopnmvqwertasdfghjk',
     current_line_only = false,
     jump_on_sole_occurrence = true,
 }
