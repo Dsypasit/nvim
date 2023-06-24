@@ -36,6 +36,8 @@ Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'windwp/nvim-spectre'
 Plug 'cljoly/telescope-repo.nvim'
+Plug 'kevinhwang91/nvim-bqf'
+Plug 'sindrets/diffview.nvim'
 
 " nvim-tree
 Plug 'nvim-tree/nvim-tree.lua'
@@ -112,6 +114,7 @@ nnoremap <space>tt <cmd>Telescope<cr>
 
 let g:rooter_patterns = ['.git', '.svn', 'package.json', '!node_modules']
 nnoremap <space>ff <cmd>Telescope find_files<cr>
+nnoremap <space>fm <cmd>Telescope marks<cr>
 nnoremap <space>fb <cmd>Telescope buffers<cr>
 nnoremap <space>fh <cmd>Telescope help_tags<cr>
 nnoremap <space>ft <cmd>Telescope tags<cr>
