@@ -31,6 +31,7 @@ Plug 'Shatur/neovim-session-manager'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'stevearc/dressing.nvim'
@@ -38,6 +39,7 @@ Plug 'windwp/nvim-spectre'
 Plug 'cljoly/telescope-repo.nvim'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'sindrets/diffview.nvim'
+Plug 'kdheepak/lazygit.nvim'
 
 " nvim-tree
 Plug 'nvim-tree/nvim-tree.lua'
@@ -101,6 +103,8 @@ Plug 'windwp/nvim-ts-autotag'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'rust-lang/rust.vim'
 
+Plug 'chipsenkbeil/distant.nvim'
+
 call plug#end()
 
 set termguicolors
@@ -122,7 +126,7 @@ nnoremap <space>fg <cmd>Telescope git_files<cr>
 nnoremap <space>fo <cmd>Telescope oldfiles<cr>
 nnoremap <space><space> <cmd>Telescope buffers<cr>
 " nnoremap <space>fp <cmd>lua require'telescope'.extensions.projects.projects{}<cr>
-nnoremap <space>fd <cmd>Telescope file_browser cwd=~/coding<cr>
+nnoremap <space>fd <cmd>Telescope file_browser cwd=~/code<cr>
 
 noremap <space>ss <cmd>Telescope live_grep<cr>
 nnoremap <space>sw <cmd>Telescope grep_string<cr>
@@ -208,7 +212,7 @@ autocmd FileType ruby command! -nargs=0 Rc :sp|:res -10|:term ruby % <cr>i
 " golang
 let g:go_gopls_enabled=0
 let g:go_def_mapping_enabled = 0
-"autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+" autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua OrgImports(1000)
 autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 "au filetype go inoremap <buffer> . .<C-x><C-o>

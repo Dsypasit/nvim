@@ -1,4 +1,5 @@
 require('mason').setup()
+require('mason-lspconfig').setup()
 --require 'alpha'.setup(require 'alpha.themes.startify'.opts)
 require("rest-nvim").setup({
 	-- Open request results in a horizontal split
