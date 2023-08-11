@@ -127,6 +127,7 @@ nnoremap <space>fo <cmd>Telescope oldfiles<cr>
 nnoremap <space><space> <cmd>Telescope buffers<cr>
 " nnoremap <space>fp <cmd>lua require'telescope'.extensions.projects.projects{}<cr>
 nnoremap <space>fd <cmd>Telescope file_browser cwd=~/code<cr>
+nnoremap <space>fl <cmd>LazyGit<cr>
 
 noremap <space>ss <cmd>Telescope live_grep<cr>
 nnoremap <space>sw <cmd>Telescope grep_string<cr>
