@@ -40,6 +40,7 @@ Plug 'cljoly/telescope-repo.nvim'
 Plug 'kevinhwang91/nvim-bqf'
 Plug 'sindrets/diffview.nvim'
 Plug 'kdheepak/lazygit.nvim'
+Plug 'edluffy/hologram.nvim'
 
 " nvim-tree
 Plug 'nvim-tree/nvim-tree.lua'
@@ -59,6 +60,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " floatterm
 Plug 'voldikss/vim-floaterm'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'VonHeikemen/fine-cmdline.nvim'
+" Plug 'giusgad/pets.nvim'
 
 " theme
 Plug 'morhetz/gruvbox'

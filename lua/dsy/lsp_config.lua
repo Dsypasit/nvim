@@ -310,3 +310,8 @@ require 'lspconfig'.prismals.setup {
     on_attach = on_attach,
 }
 
+nvim_lsp.solidity.setup ({
+    handlers = handlers,
+    capabilities = capabilities,
+    on_attach = on_attach,
+})
