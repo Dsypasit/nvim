@@ -26,7 +26,7 @@ Plug 'NTBBloodbath/rest.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-Plug 'Shatur/neovim-session-manager'
+" Plug 'Shatur/neovim-session-manager'
 " Plug 'ahmedkhalf/project.nvim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'ThePrimeagen/harpoon'
@@ -235,6 +235,7 @@ set ignorecase
 set title
 set relativenumber
 nmap <F2> :set relativenumber!<cr>
+set autoindent
 nmap <F3> :set cursorline!<cr>
 nmap <F4> :source ~/.config/nvim/init.vim<cr>
 set encoding=utf-8
